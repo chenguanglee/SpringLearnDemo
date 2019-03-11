@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 自动化配置-->
+    <context:component-scan base-package="com.chenguangli.spring.soudsystem"/>
+
+    <!-- xml显示配置    -->
+    <bean id="compactDisc" class="com.chenguangli.spring.soudsystem.SgtPeppers"/>
+
+    <bean class="com.chenguangli.spring.soudsystem.CDPlayer" id="cdPlayer">
+        <constructor-arg ref="compactDisc"/>
+    </bean>
+    <!-- 第二种写法使用的 xmlns:c="http://www.springframework.org/schema/c" c-命名空间-->
+    <!--<bean class="com.chenguangli.spring.soudsystem.CDPlayer" id="cdPlayer" c:cd-ref="compactDisc"/>-->
+
+    <!-- 字面量装配注入到构造器 -->
+    <bean class="com.chenguangli.spring.soudsystem.BlankDisc" id="blankDisc">
+        <constructor-arg value="xixi"/>
+        <constructor-arg value="haha"/>
+        <!--给list赋值 -->
+        <constructor-arg>
+            <!--给list赋值为null, 但是在使用的时候会出现NPE -->
+            <!--<null/>-->
+            <list>
+                <value>one</value>
+                <value>two</value>
+                <value>three</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
