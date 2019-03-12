@@ -1,6 +1,12 @@
 package leetcode.primary;
 
+import com.sun.javafx.binding.SelectBinding;
+import com.sun.xml.internal.ws.api.server.SDDocument;
 import org.junit.Test;
+import sun.net.sdp.SdpSupport;
+
+import java.awt.dnd.DragSourceDragEvent;
+import java.util.*;
 
 public class LinkedListTest {
 
@@ -60,16 +66,50 @@ public class LinkedListTest {
         return pre.next;
     }
 
+    /**
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode p = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    }
+
+    public ListNode reverseListIte(ListNode head) {
+
+
+        ListNode pre = null;
+        ListNode cur = head;
+        ListNode next = null;   // 下一个节点
+            //1->2->3
+        while (cur != null) {
+            // 拿到原来链表head的下一个节点
+            next = cur.next;
+            // 把当前链表的下一个节点指向上一个节点也就是pre
+            cur.next = pre;
+            // 重置pre为当前链表节点
+            pre = cur;
+            // 重置当前节点
+            cur = next;
+        }
+        // 返回反转后的链表 也就是pre 其实就是cur
+        return pre;
+    }
+
     @Test
     public void testNode() {
         ListNode node = new ListNode(1);
-        removeNthFromEnd(node, 1);
         ListNode pre = node;
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
         pre.next = two;
         pre = pre.next;
         pre.next = three;
-        removeNthFromEnd(node, 1);
+        ListNode node1 = reverseListIte(node);
+        System.out.println("asdasasdasnfhhfnnndjsjjsjdjasjkdjkajjkkljf");
     }
 }

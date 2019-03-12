@@ -24,6 +24,7 @@ public class CDPlayerTest {
 //    @Qualifier("cDPlayer") //当bean装配发生歧义时, 可以使用该注解来选定使用哪个bean
     private MediaPlayer player;
 
+
     @Test
     public void cdShouldNotBeNull() {
         assertNotNull(cd);
