@@ -1,12 +1,6 @@
 package leetcode.primary;
 
-import com.sun.javafx.binding.SelectBinding;
-import com.sun.xml.internal.ws.api.server.SDDocument;
 import org.junit.Test;
-import sun.net.sdp.SdpSupport;
-
-import java.awt.dnd.DragSourceDragEvent;
-import java.util.*;
 
 public class LinkedListTest {
 
@@ -110,6 +104,6 @@ public class LinkedListTest {
         pre = pre.next;
         pre.next = three;
         ListNode node1 = reverseListIte(node);
-        System.out.println("asdasasdasnfhhfnnndjsjjsjdjasjkdjkajjkkljf");
+        System.out.println(" ");
     }
 }

@@ -2,30 +2,18 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        System.out.println();
     }
+
+    /*
+    some concept：
+
+    EJB: Enterprise JavaBean 企业级JavaBean
+    POJO: Plain Old Java Object 简单老式Java对象
+    JDO: Java Data Object Java数据对象
+    AOP: Aspect-Oriented Programming 面向切面编程
+     */
 
 }
 
-class Holder<T> {
-    private T a;
 
-    public Holder(T a) {
-        this.a = a;
-    }
-
-    public T getA() {
-        return a;
-    }
-
-    public void setA(T a) {
-        this.a = a;
-    }
-}
-
-class Sholder<T> extends Holder<T> {
-
-    public Sholder(T a) {
-        super(a);
-    }
-}
