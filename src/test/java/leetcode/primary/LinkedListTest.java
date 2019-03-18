@@ -61,6 +61,14 @@ public class LinkedListTest {
     }
 
     /**
+     * title:反转链表
+     * problem description:
+     * 反转一个单链表
+     * example:
+     * 输入: 1->2->3->4->5->NULL
+     * 输出: 5->4->3->2->1->NULL
+     * 递归法
+     *
      * @param head
      * @return
      */
@@ -73,13 +81,25 @@ public class LinkedListTest {
         return p;
     }
 
+    /**
+     * title:反转链表
+     * problem description:
+     * 反转一个单链表
+     * example:
+     * 输入: 1->2->3->4->5->NULL
+     * 输出: 5->4->3->2->1->NULL
+     * 迭代法
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseListIte(ListNode head) {
 
 
         ListNode pre = null;
         ListNode cur = head;
         ListNode next = null;   // 下一个节点
-            //1->2->3
+        //1->2->3
         while (cur != null) {
             // 拿到原来链表head的下一个节点
             next = cur.next;
@@ -94,6 +114,33 @@ public class LinkedListTest {
         return pre;
     }
 
+    /**
+     * title:合并两个有序链表
+     * problem description:
+     * 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     * example:
+     * 输入：1->2->4, 1->3->4->6
+     * 输出：1->1->2->3->4->4->6
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+        ListNode pre;
+        ListNode cur;
+        while (l1 != null) {
+            if (l1.val > l2.val) {
+                pre = new ListNode(l2.val);
+                cur = pre;
+            } else {
+                pre = new ListNode(l1.val);
+            }
+        }
+        return null;
+    }
+
     @Test
     public void testNode() {
         ListNode node = new ListNode(1);
@@ -106,4 +153,6 @@ public class LinkedListTest {
         ListNode node1 = reverseListIte(node);
         System.out.println(" ");
     }
+
+
 }
