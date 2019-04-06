@@ -2,6 +2,8 @@ package leetcode.primary;
 
 import org.junit.Test;
 
+import java.util.List;
+
 public class LinkedListTest {
 
     public class ListNode {
@@ -127,31 +129,58 @@ public class LinkedListTest {
      * @return
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-
-        ListNode pre;
-        ListNode cur;
-        while (l1 != null) {
-            if (l1.val > l2.val) {
-                pre = new ListNode(l2.val);
-                cur = pre;
+        // 类似归并排序中的合并过程
+        ListNode dummyHead = new ListNode(0);
+        ListNode cur = dummyHead;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                cur.next = l1;
+                cur = cur.next;
+                l1 = l1.next;
             } else {
-                pre = new ListNode(l1.val);
+                cur.next = l2;
+                cur = cur.next;
+                l2 = l2.next;
             }
         }
-        return null;
+        // 任一为空，直接连接另一条链表
+        if (l1 == null) {
+            cur.next = l2;
+        } else {
+            cur.next = l1;
+        }
+        return dummyHead.next;
     }
 
     @Test
     public void testNode() {
-        ListNode node = new ListNode(1);
-        ListNode pre = node;
-        ListNode two = new ListNode(2);
-        ListNode three = new ListNode(3);
-        pre.next = two;
-        pre = pre.next;
-        pre.next = three;
-        ListNode node1 = reverseListIte(node);
+
+        ListNode head = new ListNode(1);
+        ListNode bNode = head;
+        head.val = 2;
+        ListNode newNode1 = createLinkedList("123");
+        ListNode newNode2 = createLinkedList("1234");
+        ListNode returnNode = mergeTwoLists(newNode1, newNode2);
+        ListNode node1 = reverseListIte(newNode1);
         System.out.println(" ");
+    }
+
+    /**
+     * 根据字符串创建一个链表
+     *
+     * @param str
+     * @return
+     */
+    public ListNode createLinkedList(String str) {
+        ListNode head = new ListNode(0);
+        ListNode pre = head;
+        for (int i = 0; i < str.length(); i++) {
+            int node = str.charAt(i) - '0';
+            ListNode addNode = new ListNode(node);
+            head.next = addNode;
+            head = head.next;
+        }
+        return pre.next;
     }
 
 

@@ -8,9 +8,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.Serializable;
+
 import static org.junit.Assert.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class) //测试开始的时候自动创建Spring的应用上下文
 //@ContextConfiguration(locations = "classpath*:/spring.xml") //方式一
 @ContextConfiguration(classes = CDPlayerConfig.class) //方式二
 //@ActiveProfiles("dev") //设置测试中使用的bean environment
