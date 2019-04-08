@@ -9,4 +9,9 @@ public class CompactDiscImpl2 implements CompactDisc {
     public void play() {
         System.out.println("chenguangli custom impl");
     }
+
+    @Override
+    public void playTrack(int trackNum) {
+
+    }
 }
