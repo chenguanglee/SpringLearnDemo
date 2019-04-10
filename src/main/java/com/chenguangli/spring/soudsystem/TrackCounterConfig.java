@@ -17,4 +17,5 @@ public class TrackCounterConfig {
     public TrackCounter trackCounter() {
         return new TrackCounter();
     }
+
 }

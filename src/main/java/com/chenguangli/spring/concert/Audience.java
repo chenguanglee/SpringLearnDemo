@@ -2,8 +2,10 @@ package com.chenguangli.spring.concert;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class Audience {
 
     @Pointcut("execution(* com.chenguangli.spring.concert.Performance.perform(..))")

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan
 public class ConcertConfig {
 
-    @Bean
-    public Audience audience() {
-        return new Audience();
-    }
+//    @Bean
+//    public Audience audience() {
+//        return new Audience();
+//    }
 }

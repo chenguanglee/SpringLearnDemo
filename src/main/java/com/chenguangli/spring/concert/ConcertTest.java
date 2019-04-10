@@ -13,8 +13,11 @@ public class ConcertTest {
     @Autowired
     private Performance performance;
 
+
     @Test
     public void test1() {
         performance.perform();
+        Encoreable encoreable = (Encoreable) performance;
+        encoreable.performEncore();
     }
 }
