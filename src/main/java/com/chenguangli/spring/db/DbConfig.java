@@ -106,7 +106,6 @@ public class DbConfig {
     }
 
 
-    //------------------------------------------//
     @Bean
     public SpitterRepository spitterRepository(JdbcTemplate jdbcTemplate) {
         System.out.println("spitterRepository jdbcTemplate 内存地址:" + System.identityHashCode(jdbcTemplate));

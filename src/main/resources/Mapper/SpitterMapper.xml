@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenguangli.spring.mybatis.SpitterDao">
+    <resultMap id="spitter" type="com.chenguangli.spring.db.Spitter">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="full_name" property="fullName"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>
