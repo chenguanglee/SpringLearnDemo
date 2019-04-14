@@ -11,6 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface SpitterDao {
 
     @Select("SELECT * FROM spitter where id = #{id}")
-    @ResultMap("spitter")
+    //@ResultMap("spitter")
     Spitter getSpitter(@Param("id") int id);
 }
