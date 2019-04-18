@@ -23,7 +23,6 @@ public interface SpitterDao {
             @Result(property = "version", column = "version")
     })
     @Select("SELECT * FROM spitter where id = #{id}")
-    //@ResultMap("baseResultMap")
     Spitter getSpitter(@Param("id") int id);
 
     @Select("SELECT * FROM spitter where id = #{id}")

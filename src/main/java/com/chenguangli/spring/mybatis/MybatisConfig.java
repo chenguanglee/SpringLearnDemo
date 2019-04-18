@@ -2,13 +2,17 @@ package com.chenguangli.spring.mybatis;
 
 import com.chenguangli.spring.db.DbConfig;
 import com.chenguangli.spring.db.Spitter;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -17,6 +21,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Import(DbConfig.class)
+@MapperScan(basePackageClasses = MybatisConfig.class)
 public class MybatisConfig {
 
 
@@ -27,15 +32,38 @@ public class MybatisConfig {
         //factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("mapper/SpitterMapper.xml"));
         //使得 mapper文件中type="com.chenguangli.spring.db.Spitter" 可以直接写成 type="Spitter"
         //factoryBean.setTypeAliases(new Class[]{Spitter.class});
-        factoryBean.setConfiguration(configuration());
+        //factoryBean.setConfiguration(configuration());
         return factoryBean.getObject();
     }
 
+    /**
+     * 事务
+     *
+     * @param dataSource
+     * @return
+     */
     @Bean
-    public SpitterDao spitterMapper(SqlSessionFactory sqlSessionFactory) throws Exception {
-        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
-        return sqlSessionTemplate.getMapper(SpitterDao.class);
+    public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
+
+//    @Bean
+//    public SpitterDao spitterMapper(SqlSessionFactory sqlSessionFactory) throws Exception {
+//        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
+//        return sqlSessionTemplate.getMapper(SpitterDao.class);
+//    }
+
+    /**
+     * 和注解@MapperScan效果一样
+     *
+     * @return
+     */
+//    @Bean
+//    public MapperScannerConfigurer scannerConfigurer() {
+//        MapperScannerConfigurer configurer = new MapperScannerConfigurer();
+//        configurer.setBasePackage("com.chenguangli.spring.mybatis");
+//        return configurer;
+//    }
 
 //    @Bean
 //    public SpitterDao mapperMapperFactoryBean(SqlSessionFactory sqlSessionFactory) throws Exception {
@@ -50,7 +78,8 @@ public class MybatisConfig {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         //可以将下划线的字段转换为驼峰
         //configuration.setMapUnderscoreToCamelCase(true);
-        configuration.addMapper(SpitterDao.class);
+        //configuration.addMapper(SpitterDao.class);
+        configuration.addMappers("com.chenguangli.spring.mybatis");
         return configuration;
     }
 }
