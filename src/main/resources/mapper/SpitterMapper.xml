@@ -11,4 +11,29 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <update id="updateSpitter0" parameterType="com.chenguangli.spring.db.Spitter">
+        update spitter
+        set
+        <if test="email != null">
+            email=#{email},
+        </if>
+        <if test="password !=null">
+            password=#{password}
+        </if>
+        <where>
+            <if test="userName != null">
+                user_name=#{userName}
+            </if>
+        </where>
+    </update>
+
+    <select id="getUserName" resultType="java.lang.String">
+        Select user_name from spitter
+        where id= #{id}
+    </select>
+
+    <insert id="insert0" parameterType="com.chenguangli.spring.db.Spitter" flushCache="true"
+    timeout="3" statementType="PREPARED" useGeneratedKeys="true" keyProperty="" >
+
+    </insert>
 </mapper>

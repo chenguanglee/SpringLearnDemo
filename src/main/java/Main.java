@@ -22,6 +22,7 @@ public class Main {
     JPA: Java Persistence API Java持久化API
     JNDI: Java Naming and Directory Interface Java命名与目录接口
     JDO: Java Data Object Java 数据对象
+    OGNL: Object-Graph Navigation Language
      */
 
 
