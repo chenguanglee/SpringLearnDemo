@@ -18,6 +18,7 @@ public class LambdaExample {
         list.forEach((tmp) -> System.out.println(tmp + ","));
 
         list.forEach(System.out::println);
+        
 
     }
 
