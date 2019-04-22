@@ -11,10 +11,6 @@ import java.util.List;
  */
 public class LambdaExample {
 
-    interface Action {
-        int add();
-    }
-
     @Test
     public void test1() {
         List<String> list = buildList();
