@@ -1,3 +1,4 @@
+import java.io.File;
 
 public class Main {
 
@@ -5,6 +6,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println();
         Main main = new Main();
+        System.getProperty("user.dir");
+        System.out.println();
+
     }
 
     /*
