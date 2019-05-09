@@ -1,9 +1,8 @@
 package com.chenguangli.stream;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.junit.Test;
+
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -13,12 +12,11 @@ import java.util.Scanner;
 public class TextFileTest {
 
     private static final String FILE_PATH = ".\\src\\main\\java\\com\\chenguangli\\stream\\employee.dat";
+    private static final String FILE_PATH_0 = ".\\src\\main\\java\\com\\chenguangli\\stream\\employeeBinary.dat";
+
 
     public static void main(String[] args) {
-        Employee[] staff = new Employee[3];
-        staff[0] = new Employee("lee", 123123.1, 1995, 10, 9);
-        staff[1] = new Employee("sun", 12312313.2, 1990, 2, 3);
-        staff[2] = new Employee("shine", 111222.3, 1991, 3, 5);
+        Employee[] staff = buildEmployeeArray();
         File file = new File(FILE_PATH);
         try (PrintWriter out = new PrintWriter(file, "UTF-8")) {
             writeData(staff, out);
@@ -36,6 +34,14 @@ public class TextFileTest {
 
         }
 
+    }
+
+    private static Employee[] buildEmployeeArray() {
+        Employee[] staff = new Employee[3];
+        staff[0] = new Employee("lee", 123123.1, 1995, 10, 9);
+        staff[1] = new Employee("sun", 12312313.2, 1990, 2, 3);
+        staff[2] = new Employee("shine", 111222.3, 1991, 3, 5);
+        return staff;
     }
 
     private static void writeData(Employee[] employees, PrintWriter out) throws IOException {
@@ -69,5 +75,32 @@ public class TextFileTest {
         int month = Integer.parseInt(tokens[3]);
         int day = Integer.parseInt(tokens[4]);
         return new Employee(name, money, year, month, day);
+    }
+
+
+    public static void writeData(DataOutput out, Employee e) throws IOException {
+        writeFixedString(e.getName(), out);
+        out.writeInt(e.getDay());
+    }
+
+    public static void writeFixedString(String s, DataOutput out) throws IOException {
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            out.writeChar(ch);
+        }
+    }
+
+    @Test
+    public void testDataOutput() throws IOException {
+        Employee[] employees = buildEmployeeArray();
+
+        try (DataOutputStream out = new DataOutputStream(new FileOutputStream(FILE_PATH_0))) {
+            for (Employee employee : employees) {
+                writeData(out, employee);
+            }
+        }
+        try(DataInputStream in = new DataInputStream(new FileInputStream(FILE_PATH_0))){
+            
+        }
     }
 }
