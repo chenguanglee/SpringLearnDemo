@@ -5,9 +5,13 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -19,19 +23,25 @@ import java.net.InetAddress;
  */
 @Configuration
 @ComponentScan
+@PropertySource("classpath:/app.properties")
 public class EsConfiguration {
 
-    private String esHost="localhost";
+    @Autowired
+    private Environment environment;
 
-    private int esPort=9300;
+    @Value("${es.host}")
+    private String esHost;
+
+    @Value("${es.port}")
+    private String esPort;
 
     private TransportClient client;
 
     @PostConstruct
     public void initialize() throws Exception {
-        Settings settings = Settings.builder().put("cluster.name","elasticsearch").build();
+        Settings settings = Settings.builder().put("cluster.name", "elasticsearch").build();
         client = new PreBuiltTransportClient(settings)
-                .addTransportAddress(new TransportAddress(InetAddress.getByName(esHost),esPort));
+                .addTransportAddress(new TransportAddress(InetAddress.getByName(esHost), Integer.parseInt(esPort)));
     }
 
     @Bean
@@ -44,5 +54,14 @@ public class EsConfiguration {
         if (client != null) {
             client.close();
         }
+    }
+
+    public String getEsHost() {
+        return environment.getProperty("es.host", "localhost");
+    }
+
+    public String getEsPort() {
+        return environment.getProperty("es.port", "9300");
+
     }
 }
