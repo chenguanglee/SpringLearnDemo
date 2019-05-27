@@ -100,7 +100,7 @@ public class TextFileTest {
             }
         }
         try(DataInputStream in = new DataInputStream(new FileInputStream(FILE_PATH_0))){
-            
+
         }
     }
 }
