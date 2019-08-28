@@ -28,7 +28,7 @@ public class BinaryTreeTest {
         for (int i = 0; i < mediumOrder.length(); i++) {
             if (firstOrder.charAt(0) == mediumOrder.charAt(i)) {
                 node.setLeftNode(reConstruct(firstOrder.substring(1, i + 1 > firstOrder.length() ? firstOrder.length() : i + 1), mediumOrder.substring(0, i)));
-                node.setRightNode(reConstruct(firstOrder.substring(i + 1 > firstOrder.length() ? firstOrder.length() : i + 1), mediumOrder.substring(i)));
+                node.setRightNode(reConstruct(firstOrder.substring(i + 1 > firstOrder.length() ? firstOrder.length() : i + 1), mediumOrder.substring(i + 1 > mediumOrder.length() ? mediumOrder.length() : i + 1)));
             }
         }
         return node;
@@ -39,9 +39,16 @@ public class BinaryTreeTest {
     public void test1() {
         String firstOrder = "1245736";
         String mediumOrder = "4275136";
+        System.out.println(mediumOrder.substring(0, 1));
+        System.out.println(mediumOrder.substring(1));
         System.out.println(firstOrder.substring(firstOrder.length()));
         BinaryTreeNode node = reConstruct(firstOrder, mediumOrder);
         BinaryTree tree = new BinaryTree(node);
-        tree.lastOrder(node);
+        tree.firstOrder(node);
+        System.out.println();
+        tree.mediumOrder(node);
+        System.out.println();
+        System.out.println("use no recursive");
+        tree.mediumOrderNoRecursive(node);
     }
 }

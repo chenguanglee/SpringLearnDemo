@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Stack;
+
 /**
  * @author chenguangli
  * @date 2019/8/16 0:04
@@ -83,7 +85,7 @@ public class BinaryTree {
         if (node == null) {
             return;
         }
-        System.out.println(node.getData());
+        System.out.print(node.getData() + " ");
         firstOrder(node.getLeftNode());
         firstOrder(node.getRightNode());
     }
@@ -98,10 +100,29 @@ public class BinaryTree {
             return;
         }
         mediumOrder(node.getLeftNode());
-        System.out.println(node.getData());
+        System.out.print(node.getData() + " ");
         mediumOrder(node.getRightNode());
     }
 
+    /**
+     * 中序遍历(左根右)非递归
+     *
+     * @param node
+     */
+    public void mediumOrderNoRecursive(BinaryTreeNode node) {
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        while (!stack.empty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.getLeftNode();
+            }
+            if (!stack.empty()) {
+                node = stack.pop();
+                System.out.print(node.getData() + " ");
+                node = node.getRightNode();
+            }
+        }
+    }
 
     /**
      * 后序遍历(左右根)
