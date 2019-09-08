@@ -15,7 +15,7 @@ public class SortTest {
 
     @Test
     public void testSort() {
-        int[] array = new int[]{4, 2, 8, 15, 7};
+        int[] array = new int[]{10, 4, 2, 8, 15, 7};
         int[] array1 = {3, 2, 6, 5, 9};
         int[] targetArray;
         //targetArray = bubbleSort(array);

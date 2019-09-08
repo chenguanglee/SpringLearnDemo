@@ -26,7 +26,7 @@ public class NoBlockClient {
         // 2. 发送一张图片给服务端吧
         FileChannel fileChannel = FileChannel.open(Paths.get("X:\\Users\\ozc\\Desktop\\新建文件夹\\1.png"), StandardOpenOption.READ);
 
-        // 3.要使用NIO，有了Channel，就必然要有Buffer，Buffer是与数据打交道的呢
+        // 3.要使用NIO，有了Channel，就必然要有Buffer，Buffer是与数据打交道的
         ByteBuffer buffer = ByteBuffer.allocate(1024);
 
         // 4.读取本地文件(图片)，发送到服务器
