@@ -198,6 +198,13 @@
             <artifactId>guava</artifactId>
             <version>27.1-jre</version>
         </dependency>
+
+        <!-- spring 状态机 -->
+        <dependency>
+            <groupId>org.springframework.statemachine</groupId>
+            <artifactId>spring-statemachine-core</artifactId>
+            <version>2.1.3.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

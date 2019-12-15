@@ -3,6 +3,7 @@ package com.chenguangli.spring.redis;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -16,11 +17,13 @@ public class RedisConfig {
     @Bean
     public RedisConnectionFactory redisCF() {
         System.out.println("set redis connection info");
-        JedisConnectionFactory cf = new JedisConnectionFactory();
+
+        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration("127.0.0.1",6379);
+        JedisConnectionFactory cf = new JedisConnectionFactory(configuration);
         //also can use  LettuceConnectionFactory
         //LettuceConnectionFactory lf = new LettuceConnectionFactory();
-        cf.setHostName("127.0.0.1");
-        cf.setPort(6379);
+//        cf.setHostName();
+//        cf.setPort(6379);
         return cf;
     }
 

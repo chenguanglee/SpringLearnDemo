@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
-@Configuration //表明这个类是一个配置类
+@Configuration //表明这个类是一个配置类, 这样在类下可以使用@Bean 注解配置bean
 //@ComponentScan //(下面定义了@Bean就会冲突) 自动化配置
 @Import(CDConfig.class) //引入其他javaConfig
 //@ImportResource("classpath:spring.xml") //导入xml中的bean配置
