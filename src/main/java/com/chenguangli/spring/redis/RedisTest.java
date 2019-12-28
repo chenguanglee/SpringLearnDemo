@@ -36,6 +36,7 @@ public class RedisTest {
     public void testTmpGetValue() {
         String value = redisTemplate.opsForValue().get(KEY);
         System.out.println(value);
+
     }
 
     @Test

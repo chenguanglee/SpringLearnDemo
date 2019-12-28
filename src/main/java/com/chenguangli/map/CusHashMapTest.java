@@ -11,7 +11,17 @@ public class CusHashMapTest {
 
     public static void main(String[] args) {
 
-        Map<String,String> hashMap = new HashMap<>();
+        int b = -1;
+//        System.out.println(Integer.toBinaryString(b));
+//        b = b >>>16;
+//        System.out.println(Integer.toBinaryString(b));
+        String a = new String("leeeeeeeeeeeeee");
+        System.out.println(a);
+        int h;
+        System.out.println((h = a.hashCode()) ^ (h >>> 16));
+        System.out.println(a.hashCode());
+        a.equals(123);
+        Map<String,String> hashMap = new HashMap<>(1);
         hashMap.put("123","123");
         CusHashMap<String, String> map = new CusHashMap<>(8);
 
