@@ -15,6 +15,7 @@ public class BalanceWeightRoundRobin {
 
     private static Map<String, Weight> map = new HashMap<>();
 
+    //所有权重之和
     private static int WEIGHT_SUM;
 
     static {
@@ -47,7 +48,7 @@ public class BalanceWeightRoundRobin {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 9; i++) {
             System.out.println(getServer());
         }
     }

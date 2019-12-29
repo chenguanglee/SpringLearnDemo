@@ -8,6 +8,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * 一致性hash
+ *
  * @author chenguangli
  * @date 2019/12/28 13:27
  */
@@ -15,7 +17,7 @@ public class ConsistentHash {
 
     private static TreeMap<Integer, String> virtualNode = new TreeMap<>();
 
-    private static final int VIRTUAL_NODES = 160;
+    private static final int VIRTUAL_NODES = 120;
 
     static {
         for (String ip : ServerIps.LIST) {

@@ -20,10 +20,14 @@ public class ServerIps {
 
     public static final Map<String, Integer> WEIGHT_MAP = new LinkedHashMap<>();
 
+    public static final Map<String, Integer> WEIGHT_MAP_1 = new HashMap<>();
+
+    public static final Map<String, Integer> WEIGHT_MAP_2 = new TreeMap<>();
+
 
     static {
         WEIGHT_MAP.put("192.168.0.1", 5);
-        WEIGHT_MAP.put("192.168.0.2", 1);
+        WEIGHT_MAP.put("192.168.0.2", 3);
         WEIGHT_MAP.put("192.168.0.3", 1);
 
     }

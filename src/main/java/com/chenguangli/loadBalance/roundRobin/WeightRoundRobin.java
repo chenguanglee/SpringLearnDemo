@@ -5,6 +5,8 @@ import com.chenguangli.loadBalance.ServerIps;
 import java.util.Map;
 
 /**
+ * 加权轮询
+ *
  * @author chenguangli
  * @date 2019/12/28 12:40
  */
@@ -23,7 +25,9 @@ public class WeightRoundRobin {
 
     public static String getServer() {
 
-        pos %= IP_LIST_SIZE;
+        if (pos == IP_LIST_SIZE) {
+            pos = 0;
+        }
         int offset = pos;
         pos++;
         for (Map.Entry<String, Integer> entry : ServerIps.WEIGHT_MAP.entrySet()) {
