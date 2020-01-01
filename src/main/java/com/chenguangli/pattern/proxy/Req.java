@@ -1,4 +1,4 @@
-package com.chenguangli.bean;
+package com.chenguangli.pattern.proxy;
 
 import lombok.Data;
 

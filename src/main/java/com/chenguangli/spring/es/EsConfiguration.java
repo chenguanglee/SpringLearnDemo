@@ -1,4 +1,4 @@
-package com.chenguangli.es;
+package com.chenguangli.spring.es;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;

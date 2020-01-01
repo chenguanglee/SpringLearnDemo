@@ -1,7 +1,5 @@
 package com.chenguangli.leetcode.primary;
 
-import com.chenguangli.bean.BinaryTree;
-import com.chenguangli.bean.BinaryTreeNode;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 

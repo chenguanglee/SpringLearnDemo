@@ -1,14 +1,12 @@
 package com.chenguangli.pattern.proxy;
 
-import com.chenguangli.bean.Req;
-
 /**
  * @author chenguangli
  * @date 2019/6/22 22:42
  */
 public class ChenhuTest {
 
-    public static final String CLAZZ_NAME = "com.chenguangli.bean.Req";
+    public static final String CLAZZ_NAME = "com.chenguangli.pattern.proxy.Req";
 
     public static void main(String[] args) throws Exception {
         Class clazz = Class.forName(CLAZZ_NAME);

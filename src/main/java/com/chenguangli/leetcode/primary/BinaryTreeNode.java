@@ -1,4 +1,4 @@
-package com.chenguangli.bean;
+package com.chenguangli.leetcode.primary;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.chenguangli.es;
+package com.chenguangli.spring.es;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
