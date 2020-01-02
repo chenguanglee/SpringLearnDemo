@@ -743,6 +743,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * @param key        the key
      * @param value      the value to match if matchValue, else ignored
      * @param matchValue if true only remove if value is equal
+     *                   只删除value相等的元素
      * @param movable    if false do not move other nodes while removing
      * @return the node, or null if none
      */
@@ -778,8 +779,12 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     (value != null && value.equals(v)))) {
                 if (node instanceof TreeNode)
                     ((TreeNode<K, V>) node).removeTreeNode(this, tab, movable);
+
+                //桶位第一个元素要删除的情况
                 else if (node == p)
                     tab[index] = node.next;
+
+                //非第一个元素, 即删除链表中的元素
                 else
                     p.next = node.next;
                 ++modCount;
