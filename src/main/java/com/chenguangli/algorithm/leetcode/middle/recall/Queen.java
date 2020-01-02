@@ -1,6 +1,5 @@
 package com.chenguangli.algorithm.leetcode.middle.recall;
 
-import com.mysql.cj.result.Row;
 import org.junit.Test;
 
 /**
@@ -69,7 +68,7 @@ public class Queen {
             for (int col = 0; col < cols.length; col++) {
                 if (cols[row] == col) {
                     System.out.print("1 ");
-                }else {
+                } else {
                     System.out.print("0 ");
                 }
             }
