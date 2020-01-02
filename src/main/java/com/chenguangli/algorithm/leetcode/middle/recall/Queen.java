@@ -1,5 +1,6 @@
 package com.chenguangli.algorithm.leetcode.middle.recall;
 
+import com.mysql.cj.result.Row;
 import org.junit.Test;
 
 /**
@@ -26,7 +27,7 @@ public class Queen {
 
     @Test
     public void testQueen() {
-        placeQueen(8);
+        placeQueen(4);
     }
 
     public void placeQueen(int n) {
@@ -38,6 +39,7 @@ public class Queen {
     public void place(int row) {
         if (row == cols.length) {
             ways++;
+            show();
             return;
         }
         for (int col = 0; col < cols.length; col++) {
@@ -57,9 +59,23 @@ public class Queen {
 //            if ((row - i) / (col - cols[i]) == -1) return false;
 
             //第二种
-            if ((row - i) == Math.abs(col-cols[i])) return false;
+            if ((row - i) == Math.abs(col - cols[i])) return false;
         }
         return true;
+    }
+
+    public void show() {
+        for (int row = 0; row < cols.length; row++) {
+            for (int col = 0; col < cols.length; col++) {
+                if (cols[row] == col) {
+                    System.out.print("1 ");
+                }else {
+                    System.out.print("0 ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("============");
     }
 
 }
