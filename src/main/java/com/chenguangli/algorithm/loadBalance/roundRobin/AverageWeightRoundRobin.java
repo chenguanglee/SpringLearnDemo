@@ -13,7 +13,8 @@ public class AverageWeightRoundRobin {
     private static LinkedList<String> ipList = new LinkedList<>();
     private static LinkedList<String> currentIpList = new LinkedList<>();
 
-    private static int nextIpSite;  // 下一个机器
+    /**下一个机器 */
+    private static int nextIpSite;
 
     static {
         ipMap.put("A", 3);
