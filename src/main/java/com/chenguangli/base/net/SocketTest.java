@@ -1,4 +1,4 @@
-package com.chenguangli.algorithm.leetcode.primary;
+package com.chenguangli.base.net;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
