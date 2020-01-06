@@ -100,7 +100,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      *
      * @implSpec
      * This implementation iterates over <tt>entrySet()</tt> searching
-     * for an entry with the specified value.  If such an entry is found,
+     * for an entry with the specified SUPER_VAR.  If such an entry is found,
      * <tt>true</tt> is returned.  If the iteration terminates without
      * finding such an entry, <tt>false</tt> is returned.  Note that this
      * implementation requires linear time in the size of the map.
@@ -164,7 +164,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * @implSpec
      * This implementation iterates over <tt>entrySet()</tt> searching
      * for an entry with the specified key.  If such an entry is found,
-     * the entry's value is returned.  If the iteration terminates without
+     * the entry's SUPER_VAR is returned.  If the iteration terminates without
      * finding such an entry, <tt>null</tt> is returned.  Note that this
      * implementation requires linear time in the size of the map; many
      * implementations will override this method.
@@ -214,10 +214,10 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      *
      * @implSpec
      * This implementation iterates over <tt>entrySet()</tt> searching for an
-     * entry with the specified key.  If such an entry is found, its value is
+     * entry with the specified key.  If such an entry is found, its SUPER_VAR is
      * obtained with its <tt>getValue</tt> operation, the entry is removed
      * from the collection (and the backing map) with the iterator's
-     * <tt>remove</tt> operation, and the saved value is returned.  If the
+     * <tt>remove</tt> operation, and the saved SUPER_VAR is returned.  If the
      * iteration terminates without finding such an entry, <tt>null</tt> is
      * returned.  Note that this implementation requires linear time in the
      * size of the map; many implementations will override this method.
@@ -506,7 +506,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     }
 
     /**
-     * Returns the hash code value for this map.  The hash code of a map is
+     * Returns the hash code SUPER_VAR for this map.  The hash code of a map is
      * defined to be the sum of the hash codes of each entry in the map's
      * <tt>entrySet()</tt> view.  This ensures that <tt>m1.equals(m2)</tt>
      * implies that <tt>m1.hashCode()==m2.hashCode()</tt> for any two maps
@@ -518,7 +518,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
      * {@link Entry#hashCode hashCode()} on each element (entry) in the
      * set, and adding up the results.
      *
-     * @return the hash code value for this map
+     * @return the hash code SUPER_VAR for this map
      * @see Entry#hashCode()
      * @see Object#equals(Object)
      * @see Set#equals(Object)
@@ -533,12 +533,12 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
 
     /**
      * Returns a string representation of this map.  The string representation
-     * consists of a list of key-value mappings in the order returned by the
+     * consists of a list of key-SUPER_VAR mappings in the order returned by the
      * map's <tt>entrySet</tt> view's iterator, enclosed in braces
      * (<tt>"{}"</tt>).  Adjacent mappings are separated by the characters
-     * <tt>", "</tt> (comma and space).  Each key-value mapping is rendered as
+     * <tt>", "</tt> (comma and space).  Each key-SUPER_VAR mapping is rendered as
      * the key followed by an equals sign (<tt>"="</tt>) followed by the
-     * associated value.  Keys and values are converted to strings as by
+     * associated SUPER_VAR.  Keys and values are converted to strings as by
      * {@link String#valueOf(Object)}.
      *
      * @return a string representation of this map
@@ -595,7 +595,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
 
 
     /**
-     * An Entry maintaining a key and a value.  The value may be
+     * An Entry maintaining a key and a SUPER_VAR.  The SUPER_VAR may be
      * changed using the <tt>setValue</tt> method.  This class
      * facilitates the process of building custom map
      * implementations. For example, it may be convenient to return
@@ -614,10 +614,10 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
 
         /**
          * Creates an entry representing a mapping from the specified
-         * key to the specified value.
+         * key to the specified SUPER_VAR.
          *
          * @param key the key represented by this entry
-         * @param value the value represented by this entry
+         * @param value the SUPER_VAR represented by this entry
          */
         public SimpleEntry(K key, V value) {
             this.key   = key;
@@ -645,20 +645,20 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         }
 
         /**
-         * Returns the value corresponding to this entry.
+         * Returns the SUPER_VAR corresponding to this entry.
          *
-         * @return the value corresponding to this entry
+         * @return the SUPER_VAR corresponding to this entry
          */
         public V getValue() {
             return value;
         }
 
         /**
-         * Replaces the value corresponding to this entry with the specified
-         * value.
+         * Replaces the SUPER_VAR corresponding to this entry with the specified
+         * SUPER_VAR.
          *
-         * @param value new value to be stored in this entry
-         * @return the old value corresponding to the entry
+         * @param value new SUPER_VAR to be stored in this entry
+         * @return the old SUPER_VAR corresponding to the entry
          */
         public V setValue(V value) {
             V oldValue = this.value;
@@ -695,7 +695,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         }
 
         /**
-         * Returns the hash code value for this map entry.  The hash code
+         * Returns the hash code SUPER_VAR for this map entry.  The hash code
          * of a map entry {@code e} is defined to be: <pre>
          *   (e.getKey()==null   ? 0 : e.getKey().hashCode()) ^
          *   (e.getValue()==null ? 0 : e.getValue().hashCode())</pre>
@@ -704,7 +704,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * {@code e1} and {@code e2}, as required by the general
          * contract of {@link Object#hashCode}.
          *
-         * @return the hash code value for this map entry
+         * @return the hash code SUPER_VAR for this map entry
          * @see    #equals
          */
         public int hashCode() {
@@ -716,7 +716,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * Returns a String representation of this map entry.  This
          * implementation returns the string representation of this
          * entry's key followed by the equals character ("<tt>=</tt>")
-         * followed by the string representation of this entry's value.
+         * followed by the string representation of this entry's SUPER_VAR.
          *
          * @return a String representation of this map entry
          */
@@ -727,10 +727,10 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     }
 
     /**
-     * An Entry maintaining an immutable key and value.  This class
+     * An Entry maintaining an immutable key and SUPER_VAR.  This class
      * does not support method <tt>setValue</tt>.  This class may be
      * convenient in methods that return thread-safe snapshots of
-     * key-value mappings.
+     * key-SUPER_VAR mappings.
      *
      * @since 1.6
      */
@@ -744,10 +744,10 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
 
         /**
          * Creates an entry representing a mapping from the specified
-         * key to the specified value.
+         * key to the specified SUPER_VAR.
          *
          * @param key the key represented by this entry
-         * @param value the value represented by this entry
+         * @param value the SUPER_VAR represented by this entry
          */
         public SimpleImmutableEntry(K key, V value) {
             this.key   = key;
@@ -775,21 +775,21 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         }
 
         /**
-         * Returns the value corresponding to this entry.
+         * Returns the SUPER_VAR corresponding to this entry.
          *
-         * @return the value corresponding to this entry
+         * @return the SUPER_VAR corresponding to this entry
          */
         public V getValue() {
             return value;
         }
 
         /**
-         * Replaces the value corresponding to this entry with the specified
-         * value (optional operation).  This implementation simply throws
+         * Replaces the SUPER_VAR corresponding to this entry with the specified
+         * SUPER_VAR (optional operation).  This implementation simply throws
          * <tt>UnsupportedOperationException</tt>, as this class implements
          * an <i>immutable</i> map entry.
          *
-         * @param value new value to be stored in this entry
+         * @param value new SUPER_VAR to be stored in this entry
          * @return (Does not return)
          * @throws UnsupportedOperationException always
          */
@@ -826,7 +826,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
         }
 
         /**
-         * Returns the hash code value for this map entry.  The hash code
+         * Returns the hash code SUPER_VAR for this map entry.  The hash code
          * of a map entry {@code e} is defined to be: <pre>
          *   (e.getKey()==null   ? 0 : e.getKey().hashCode()) ^
          *   (e.getValue()==null ? 0 : e.getValue().hashCode())</pre>
@@ -835,7 +835,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * {@code e1} and {@code e2}, as required by the general
          * contract of {@link Object#hashCode}.
          *
-         * @return the hash code value for this map entry
+         * @return the hash code SUPER_VAR for this map entry
          * @see    #equals
          */
         public int hashCode() {
@@ -847,7 +847,7 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
          * Returns a String representation of this map entry.  This
          * implementation returns the string representation of this
          * entry's key followed by the equals character ("<tt>=</tt>")
-         * followed by the string representation of this entry's value.
+         * followed by the string representation of this entry's SUPER_VAR.
          *
          * @return a String representation of this map entry
          */
