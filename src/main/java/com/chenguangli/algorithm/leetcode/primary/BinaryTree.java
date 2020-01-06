@@ -19,7 +19,7 @@ public class BinaryTree {
 
     private void checkEmpty() {
         if (root == null) {
-            throw new IllegalArgumentException("can not insert to a null tree,please make sure set value for root node!");
+            throw new IllegalArgumentException("can not insert to a null tree,please make sure set SUPER_VAR for root node!");
         }
     }
 

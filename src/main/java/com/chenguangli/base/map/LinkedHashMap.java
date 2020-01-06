@@ -68,9 +68,9 @@ import java.util.function.Consumer;
  * {@code computeIfPresent}, or {@code merge} methods results
  * in an access to the corresponding entry (assuming it exists after the
  * invocation completes). The {@code replace} methods only result in an access
- * of the entry if the value is replaced.  The {@code putAll} method generates one
+ * of the entry if the SUPER_VAR is replaced.  The {@code putAll} method generates one
  * entry access for each mapping in the specified map, in the order that
- * key-value mappings are provided by the specified map's entry set iterator.
+ * key-SUPER_VAR mappings are provided by the specified map's entry set iterator.
  * <i>No other methods generate entry accesses.</i>  In particular, operations
  * on collection-views do <i>not</i> affect the order of iteration of the
  * backing map.
@@ -94,7 +94,7 @@ import java.util.function.Consumer;
  * <p>A linked hash map has two parameters that affect its performance:
  * <i>initial capacity</i> and <i>load factor</i>.  They are defined precisely
  * as for <tt>HashMap</tt>.  Note, however, that the penalty for choosing an
- * excessively high value for initial capacity is less severe for this class
+ * excessively high SUPER_VAR for initial capacity is less severe for this class
  * than for <tt>HashMap</tt>, as iteration times for this class are unaffected
  * by capacity.
  *
@@ -113,7 +113,7 @@ import java.util.function.Consumer;
  * A structural modification is any operation that adds or deletes one or more
  * mappings or, in the case of access-ordered linked hash maps, affects
  * iteration order.  In insertion-ordered linked hash maps, merely changing
- * the value associated with a key that is already contained in the map is not
+ * the SUPER_VAR associated with a key that is already contained in the map is not
  * a structural modification.  <strong>In access-ordered linked hash maps,
  * merely querying the map with <tt>get</tt> is a structural modification.
  * </strong>)
@@ -406,11 +406,11 @@ public class LinkedHashMap<K,V>
 
     /**
      * Returns <tt>true</tt> if this map maps one or more keys to the
-     * specified value.
+     * specified SUPER_VAR.
      *
-     * @param value value whose presence in this map is to be tested
+     * @param value SUPER_VAR whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
-     *         specified value
+     *         specified SUPER_VAR
      */
     public boolean containsValue(Object value) {
         for (LinkedHashMap.Entry<K,V> e = head; e != null; e = e.after) {
@@ -422,15 +422,15 @@ public class LinkedHashMap<K,V>
     }
 
     /**
-     * Returns the value to which the specified key is mapped,
+     * Returns the SUPER_VAR to which the specified key is mapped,
      * or {@code null} if this map contains no mapping for the key.
      *
      * <p>More formally, if this map contains a mapping from a key
-     * {@code k} to a value {@code v} such that {@code (key==null ? k==null :
+     * {@code k} to a SUPER_VAR {@code v} such that {@code (key==null ? k==null :
      * key.equals(k))}, then this method returns {@code v}; otherwise
      * it returns {@code null}.  (There can be at most one such mapping.)
      *
-     * <p>A return value of {@code null} does not <i>necessarily</i>
+     * <p>A return SUPER_VAR of {@code null} does not <i>necessarily</i>
      * indicate that the map contains no mapping for the key; it's also
      * possible that the map explicitly maps the key to {@code null}.
      * The {@link #containsKey containsKey} operation may be used to
@@ -486,7 +486,7 @@ public class LinkedHashMap<K,V>
      *
      * <p>This method typically does not modify the map in any way,
      * instead allowing the map to modify itself as directed by its
-     * return value.  It <i>is</i> permitted for this method to modify
+     * return SUPER_VAR.  It <i>is</i> permitted for this method to modify
      * the map directly, but if it does so, it <i>must</i> return
      * <tt>false</tt> (indicating that the map should not attempt any
      * further modification).  The effects of returning <tt>true</tt>
