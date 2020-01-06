@@ -28,7 +28,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
     /**
-     * The maximum capacity, used if a higher SUPER_VAR is implicitly specified
+     * The maximum capacity, used if a higher value is implicitly specified
      * by either of the constructors with arguments.
      * MUST be a power of two <= 1<<30.
      * 最大容量
@@ -44,7 +44,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * The bin count threshold for using a tree rather than list for a
      * bin.  Bins are converted to trees when adding an element to a
-     * bin with at least this many nodes. The SUPER_VAR must be greater
+     * bin with at least this many nodes. The value must be greater
      * than 2 and should be at least 8 to mesh with assumptions in
      * tree removal about conversion back to plain bins upon
      * shrinkage.
@@ -230,7 +230,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     transient Set<Entry<K, V>> entrySet;
 
     /**
-     * The number of key-SUPER_VAR mappings contained in this map.
+     * The number of key-value mappings contained in this map.
      * 当前哈希表中元素个数
      */
     transient int size;
@@ -247,7 +247,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     transient int modCount;
 
     /**
-     * The next size SUPER_VAR at which to resize (capacity * load factor).
+     * The next size value at which to resize (capacity * load factor).
      *
      * @serial
      */
@@ -358,33 +358,33 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * Returns the number of key-SUPER_VAR mappings in this map.
+     * Returns the number of key-value mappings in this map.
      *
-     * @return the number of key-SUPER_VAR mappings in this map
+     * @return the number of key-value mappings in this map
      */
     public int size() {
         return size;
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains no key-SUPER_VAR mappings.
+     * Returns <tt>true</tt> if this map contains no key-value mappings.
      *
-     * @return <tt>true</tt> if this map contains no key-SUPER_VAR mappings
+     * @return <tt>true</tt> if this map contains no key-value mappings
      */
     public boolean isEmpty() {
         return size == 0;
     }
 
     /**
-     * Returns the SUPER_VAR to which the specified key is mapped,
+     * Returns the value to which the specified key is mapped,
      * or {@code null} if this map contains no mapping for the key.
      *
      * <p>More formally, if this map contains a mapping from a key
-     * {@code k} to a SUPER_VAR {@code v} such that {@code (key==null ? k==null :
+     * {@code k} to a value {@code v} such that {@code (key==null ? k==null :
      * key.equals(k))}, then this method returns {@code v}; otherwise
      * it returns {@code null}.  (There can be at most one such mapping.)
      *
-     * <p>A return SUPER_VAR of {@code null} does not <i>necessarily</i>
+     * <p>A return value of {@code null} does not <i>necessarily</i>
      * indicate that the map contains no mapping for the key; it's also
      * possible that the map explicitly maps the key to {@code null}.
      * The {@link #containsKey containsKey} operation may be used to
@@ -440,13 +440,13 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * Associates the specified SUPER_VAR with the specified key in this map.
+     * Associates the specified value with the specified key in this map.
      * If the map previously contained a mapping for the key, the old
-     * SUPER_VAR is replaced.
+     * value is replaced.
      *
-     * @param key   key with which the specified SUPER_VAR is to be associated
-     * @param value SUPER_VAR to be associated with the specified key
-     * @return the previous SUPER_VAR associated with <tt>key</tt>, or
+     * @param key   key with which the specified value is to be associated
+     * @param value value to be associated with the specified key
+     * @return the previous value associated with <tt>key</tt>, or
      * <tt>null</tt> if there was no mapping for <tt>key</tt>.
      * (A <tt>null</tt> return can also indicate that the map
      * previously associated <tt>null</tt> with <tt>key</tt>.)
@@ -460,11 +460,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      *
      * @param hash         hash for key
      * @param key          the key
-     * @param value        the SUPER_VAR to put
-     * @param onlyIfAbsent if true, don't change existing SUPER_VAR
+     * @param value        the value to put
+     * @param onlyIfAbsent if true, don't change existing value
      *                     如果存在key 不改变value
      * @param evict        if false, the table is in creation mode.
-     * @return previous SUPER_VAR, or null if none
+     * @return previous value, or null if none
      */
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
@@ -725,7 +725,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Removes the mapping for the specified key from this map if present.
      *
      * @param key key whose mapping is to be removed from the map
-     * @return the previous SUPER_VAR associated with <tt>key</tt>, or
+     * @return the previous value associated with <tt>key</tt>, or
      * <tt>null</tt> if there was no mapping for <tt>key</tt>.
      * (A <tt>null</tt> return can also indicate that the map
      * previously associated <tt>null</tt> with <tt>key</tt>.)
@@ -741,8 +741,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      *
      * @param hash       hash for key
      * @param key        the key
-     * @param value      the SUPER_VAR to match if matchValue, else ignored
-     * @param matchValue if true only remove if SUPER_VAR is equal
+     * @param value      the value to match if matchValue, else ignored
+     * @param matchValue if true only remove if value is equal
      *                   只删除value相等的元素
      * @param movable    if false do not move other nodes while removing
      * @return the node, or null if none
@@ -812,11 +812,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * Returns <tt>true</tt> if this map maps one or more keys to the
-     * specified SUPER_VAR.
+     * specified value.
      *
-     * @param value SUPER_VAR whose presence in this map is to be tested
+     * @param value value whose presence in this map is to be tested
      * @return <tt>true</tt> if this map maps one or more keys to the
-     * specified SUPER_VAR
+     * specified value
      */
     public boolean containsValue(Object value) {
         Node<K, V>[] tab;
@@ -1340,9 +1340,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      *
      * @serialData The <i>capacity</i> of the HashMap (the length of the
      * bucket array) is emitted (int), followed by the
-     * <i>size</i> (an int, the number of key-SUPER_VAR
-     * mappings), followed by the key (Object) and SUPER_VAR (Object)
-     * for each key-SUPER_VAR mapping.  The key-SUPER_VAR mappings are
+     * <i>size</i> (an int, the number of key-value
+     * mappings), followed by the key (Object) and value (Object)
+     * for each key-value mapping.  The key-value mappings are
      * emitted in no particular order.
      */
     private void writeObject(java.io.ObjectOutputStream s)
