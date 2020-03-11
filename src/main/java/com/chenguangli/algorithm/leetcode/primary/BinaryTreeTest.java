@@ -35,18 +35,29 @@ public class BinaryTreeTest {
 
     @Test
     public void test1() {
-        String firstOrder = "1245736";
-        String mediumOrder = "4275136";
-        System.out.println(mediumOrder.substring(0, 1));
-        System.out.println(mediumOrder.substring(1));
-        System.out.println(firstOrder.substring(firstOrder.length()));
+        String firstOrder = "1245367";
+        String mediumOrder = "4251637";
         BinaryTreeNode node = reConstruct(firstOrder, mediumOrder);
         BinaryTree tree = new BinaryTree(node);
+        System.out.println("前序遍历");
         tree.firstOrder(node);
         System.out.println();
+        System.out.println("中序遍历");
         tree.mediumOrder(node);
         System.out.println();
-        System.out.println("use no recursive");
+        System.out.println("后序遍历");
+        tree.lastOrder(node);
+        System.out.println();
+        System.out.println("use no recursive 中序遍历");
         tree.mediumOrderNoRecursive(node);
+        System.out.println();
+        System.out.println("-----------");
+        System.out.println("二叉树交换后的前序遍历结果");
+        tree.exchangeBinaryTree(node);
+        tree.firstOrder(node);
+        System.out.println();
+        System.out.println("二叉树交换后的中序遍历结果");
+        tree.mediumOrder(node);
+
     }
 }

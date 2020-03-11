@@ -135,6 +135,22 @@ public class BinaryTree {
         }
         lastOrder(node.getLeftNode());
         lastOrder(node.getRightNode());
-        System.out.println(node.getData());
+        System.out.print(node.getData() + " ");
+    }
+
+    /**
+     * 二叉树的交换
+     *
+     * @param node
+     */
+    public void exchangeBinaryTree(BinaryTreeNode node) {
+        if (node == null) {
+            return;
+        }
+        BinaryTreeNode temp = node.getLeftNode();
+        node.setLeftNode(node.getRightNode());
+        node.setRightNode(temp);
+        exchangeBinaryTree(node.getLeftNode());
+        exchangeBinaryTree(node.getRightNode());
     }
 }
