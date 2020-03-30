@@ -3,7 +3,9 @@ package com.chenguangli.algorithm.leetcode.primary;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ArrayTest {
     /**
@@ -309,15 +311,75 @@ public class ArrayTest {
         return false;
     }
 
+    /**
+     * 找出数组中重复的数字。
+     * <p>
+     * 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+     * 示例 1：
+     * 输入：
+     * [2, 3, 1, 0, 2, 5, 3]
+     * 输出：2 或 3
+     *
+     * @param nums
+     * @return
+     */
+    public int findRepeatNumber(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            throw new RuntimeException("未找到");
+        }
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    return nums[i];
+                }
+            }
+        }
+        throw new RuntimeException("未找到");
+    }
+
+    /**
+     * 找出数组中重复的数字。
+     * <p>
+     * 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。
+     * 数组中某些数字是重复的，但不知道有几个数字重复了，也
+     * 不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+     * 示例 1：
+     * 输入：
+     * [2, 3, 1, 0, 2, 5, 3]
+     * 输出：2 或 3
+     *
+     * @param nums
+     * @return
+     */
+    public int findRepeatNumber1(int[] nums) {
+        int temp;
+        for(int i=0;i<nums.length;i++){
+            while (nums[i]!=i){
+                if(nums[i]==nums[nums[i]]){
+                    return nums[i];
+                }
+                temp=nums[i];
+                nums[i]=nums[temp];
+                nums[temp]=temp;
+            }
+        }
+        return -1;
+    }
+
     @Test
     public void testFind() {
+        Set<Integer> set = new HashSet<>();
+        boolean add = set.add(1);
+        boolean add1 = set.add(1);
+        int[] nums = new int[]{2, 3, 1, 0, 2, 5, 3};
+        int repeatNumber = findRepeatNumber1(nums);
         int[][] array = {
                 {1, 2, 8, 9},
                 {2, 4, 9, 12},
                 {4, 7, 10, 13},
                 {6, 8, 11, 15}
         };
-        int[][] array3=new int[3][];
+        int[][] array3 = new int[3][];
         System.out.println(array3.length);
         int[][] array2 = {
                 {1, 2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 27, 30, 32, 35, 36, 38, 39, 42, 44, 46, 47, 48, 49, 51, 54, 55, 56},

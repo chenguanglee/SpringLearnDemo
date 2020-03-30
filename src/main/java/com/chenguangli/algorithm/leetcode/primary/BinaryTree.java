@@ -1,21 +1,22 @@
 package com.chenguangli.algorithm.leetcode.primary;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author chenguangli
  * @date 2019/8/16 0:04
  */
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
 public class BinaryTree {
     private BinaryTreeNode root;
 
+
+    public BinaryTree(BinaryTreeNode root) {
+        this.root = root;
+    }
 
     private void checkEmpty() {
         if (root == null) {
@@ -74,6 +75,135 @@ public class BinaryTree {
         int leftChildSize = getChildSize(node.getLeftNode());
         int rightChildSize = getChildSize(node.getRightNode());
         return leftChildSize + rightChildSize + 1;
+    }
+
+    /**
+     * 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+     * <p>
+     * 假设一个二叉搜索树具有如下特征：
+     * <p>
+     * 节点的左子树只包含小于当前节点的数。
+     * 节点的右子树只包含大于当前节点的数。
+     * 所有左子树和右子树自身必须也是二叉搜索树。
+     *
+     * @param node
+     * @return
+     */
+    public boolean isValidBST(BinaryTreeNode node) {
+        return false;
+    }
+
+    /**
+     * 给定一个二叉树，检查它是否是镜像对称的。
+     *
+     * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+     *     1
+     *    / \
+     *   2   2
+     *  / \ / \
+     * 3  4 4  3
+     *
+     * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+     *     1
+     *    / \
+     *   2   2
+     *    \   \
+     *    3    3
+     *
+     * @param node
+     * @return
+     */
+    public boolean isSymmetric(BinaryTreeNode node) {
+        return isMirror(node, node);
+    }
+
+    private boolean isMirror(BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
+        if (leftNode == null && rightNode == null) {
+            return true;
+        }
+        if (leftNode == null || rightNode == null) {
+            return false;
+        }
+        return (leftNode.getData() == rightNode.getData())
+                && isMirror(leftNode.getLeftNode(), rightNode.getRightNode())
+                && isMirror(leftNode.getRightNode(), rightNode.getLeftNode());
+    }
+
+    /**
+     * 给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
+     *
+     * 例如:
+     * 给定二叉树: [3,9,20,null,null,15,7],
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 返回其层次遍历结果：
+     *
+     * [
+     *   [3],
+     *   [9,20],
+     *   [15,7]
+     * ]
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(BinaryTreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<BinaryTreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> list = new ArrayList<>();
+            while (count > 0) {
+                BinaryTreeNode node = queue.poll();
+                list.add(node.getData());
+                if (node.getLeftNode() != null) {
+                    queue.offer(node.getLeftNode());
+                }
+                if (node.getRightNode() != null) {
+                    queue.offer(node.getRightNode());
+                }
+                count--;
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+    public List<List<Integer>> list = new ArrayList<>();
+
+    public List<List<Integer>> levelOrder0(BinaryTreeNode root) {
+        foreachLevel(root, 0);
+        return list;
+    }
+
+    public void foreachLevel(BinaryTreeNode node, int dep) {
+        if (node == null) {
+            return;
+        }
+        if (list.size() <= dep) {
+            List<Integer> temp = new ArrayList<>();
+            temp.add(node.getData());
+            list.add(temp);
+        } else {
+            list.get(dep).add(node.getData());
+        }
+        foreachLevel(node.getLeftNode(), dep + 1);
+        foreachLevel(node.getRightNode(), dep + 1);
+    }
+
+    public void insert2BalanceBinaryTree(BinaryTreeNode node) {
+        if (root == null){
+            root =node;
+        }
+
     }
 
     /**
@@ -139,7 +269,7 @@ public class BinaryTree {
     }
 
     /**
-     * 二叉树的交换
+     * 二叉树的左右子树交换
      *
      * @param node
      */

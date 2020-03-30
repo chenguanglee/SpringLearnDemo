@@ -11,7 +11,7 @@ public class LoveDessert {
 
     //@Autowired
     public LoveDessert(Dessert dessert) {
-        System.out.println("through constructor");
+        //System.out.println("through constructor");
         this.dessert = dessert;
     }
 
