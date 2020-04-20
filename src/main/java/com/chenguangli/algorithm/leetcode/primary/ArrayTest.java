@@ -260,11 +260,45 @@ public class ArrayTest {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
+                    return new int[]{nums[i], nums[j]};
                 }
             }
         }
         return null;
+    }
+
+    public int[] twoSum1(int[] nums, int target) {
+        if (nums[0] > target) {
+            return null;
+        }
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            int d = target - nums[i];
+            if (d < 0) {
+                return null;
+            }
+            int j = i + 1;
+            int k = length - 1;
+            while (j <= k) {
+                int m = (j + k) / 2;
+                if (nums[m] == d) {
+                    return new int[]{nums[i], nums[m]};
+                }
+                if (nums[m] > d) {
+                    k = m - 1;
+                } else {
+                    j = m + 1;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Test
+    public void testTwoSum() {
+        int[] nums = {2, 7, 11, 15};
+        int[] ints = twoSum1(nums, 9);
+        System.out.println();
     }
 
 
@@ -756,7 +790,63 @@ public class ArrayTest {
                 return i;
             }
         }
-        return nums[nums.length-1]+1;
+        return nums[nums.length - 1] + 1;
+    }
+
+
+    /**
+     * 滑动窗口的最大值
+     * 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+     * 输出: [3,3,5,5,6,7]
+     * 解释:
+     * <p>
+     * 滑动窗口的位置                最大值
+     * ---------------               -----
+     * [1  3  -1] -3  5  3  6  7       3
+     * 1 [3  -1  -3] 5  3  6  7       3
+     * 1  3 [-1  -3  5] 3  6  7       5
+     * 1  3  -1 [-3  5  3] 6  7       5
+     * 1  3  -1  -3 [5  3  6] 7       6
+     * 1  3  -1  -3  5 [3  6  7]      7
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        int[] res = new int[nums.length - k + 1];
+        for (int i = 0; i <= nums.length - k; i++) {
+            int max = nums[i];
+            for (int j = i + 1; j < i + k; j++) {
+                if (nums[j] > max) {
+                    max = nums[j];
+                }
+            }
+            res[i] = max;
+        }
+        return res;
+    }
+
+    @Test
+    public void testWindows() {
+        int[] nums = {1,3,-1,-3,5,3,6,7};
+        int k =3;
+        int[] ints = maxSlidingWindow(nums, k);
+        int[] res = new int[0];
+        int length = res.length;
+        System.out.println();
     }
 
 

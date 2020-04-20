@@ -429,6 +429,57 @@ public class LinkedListTest {
         return null;
     }
 
+    class NewNode {
+        int val;
+        NewNode next;
+        NewNode random;
+
+        public NewNode(int val) {
+            this.val = val;
+        }
+    }
+
+    /**
+     * 复杂链表的复制
+     * 请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。
+     * todo result wrong
+     * @param head
+     * @return
+     */
+    public NewNode copyRandomList(NewNode head) {
+        NewNode newNode = new NewNode(0);
+        NewNode pre = newNode;
+        while (head != null) {
+            pre.next = new NewNode(head.val);
+            pre = pre.next;
+            pre.random = head.random;
+            head.random = pre;
+            head = head.next;
+        }
+        NewNode pre1 = newNode.next;
+        while (pre1 != null) {
+            NewNode random = pre1.random;
+            if (random != null){
+                pre1.random = random.random;
+            }
+            pre1 = pre1.next;
+        }
+        return newNode.next;
+    }
+
+    @Test
+    public void testCopyRandomList() {
+        NewNode n1 = new NewNode(1);
+        NewNode n2 = new NewNode(2);
+        NewNode n3 = new NewNode(3);
+        n1.next = n2;
+        n2.next = n3;
+        n1.random = null;
+        n2.random = n1;
+        NewNode newNode = copyRandomList(n1);
+        System.out.println();
+    }
+
     @Test
     public void testCommon() {
         ListNode newNode1 = createLinkedList("12345");
@@ -445,7 +496,7 @@ public class LinkedListTest {
     }
 
     public ListNode getLastNode(ListNode node) {
-        while (node != null){
+        while (node != null) {
             ListNode next = node.next;
             if (next == null) {
                 return node;

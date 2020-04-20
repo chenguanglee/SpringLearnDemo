@@ -9,8 +9,13 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class Student {
+public class Student implements Cloneable{
 
     private int a;
     private String b;
+
+    @Override
+    protected Student clone() throws CloneNotSupportedException {
+        return (Student)super.clone();
+    }
 }
