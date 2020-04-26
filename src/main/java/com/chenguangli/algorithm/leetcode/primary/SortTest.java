@@ -170,15 +170,14 @@ public class SortTest {
     }
 
     private int partition(int[] array, int left, int right) {
-        int pivot = left;
-        int index = pivot + 1;
+        int index = left + 1;
         for (int i = index; i <= right; i++) {
-            if (array[i] < array[pivot]) {
+            if (array[i] < array[left]) {
                 swap(array, i, index);
                 index++;
             }
         }
-        swap(array, pivot, index - 1);
+        swap(array, left, index - 1);
         return index - 1;
     }
 
@@ -186,5 +185,66 @@ public class SortTest {
         int tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int[] quickSort1(int[] array) {
+        return quickSort2(array, 0, array.length - 1);
+    }
+
+    public int[] quickSort2(int[] array, int left, int right) {
+        if (right > left){
+            int p = partition1(array,left,right);
+            quickSort2(array,left,p-1);
+            quickSort2(array,p+1,right);
+        }
+        return array;
+    }
+
+    public int partition1(int[] array,int left,int right){
+        int index = left+1;
+        for (int i = index;i<=right;i++) {
+            if (array[i] < array[left]){
+                swap1(array,i,index);
+                index++;
+            }
+        }
+        swap1(array,left,index-1);
+        return index-1;
+    }
+
+    public void swap1(int[] array,int x,int y){
+        int i = array[x];
+        array[x] =array[y];
+        array[y] = i;
     }
 }

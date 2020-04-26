@@ -9,5 +9,6 @@ public class Info {
     public static void main(String[] args) throws Exception{
         Info info = new Info();
         Info clone = (Info) info.clone();
+        System.out.println();
     }
 }

@@ -2,8 +2,6 @@ package com.chenguangli.algorithm.leetcode.primary;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public class StringTest {
 
 

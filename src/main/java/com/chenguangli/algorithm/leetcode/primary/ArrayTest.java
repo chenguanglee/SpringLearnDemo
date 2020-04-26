@@ -63,6 +63,104 @@ public class ArrayTest {
 
     }
 
+
+    /**
+     * 股票的最大利润
+     * 输入: [7,1,5,3,6,4]
+     * 输出: 5
+     * 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     * 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit1(int[] prices) {
+        if (prices == null || prices.length == 1) {
+            return 0;
+        }
+        int max = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < prices[i - 1]) {
+            } else {
+                int k = prices[i] - prices[i - 1];
+                if (k > max) {
+                    max = k;
+                }
+                prices[i] = prices[i - 1];
+            }
+        }
+        return max;
+    }
+
+    @Test
+    public void testProfit() {
+        int[] a = {7, 6, 4, 3, 1};
+        int i = maxProfit1(a);
+        System.out.println(i);
+    }
+
+
+    /**
+     * 统计一个数字在排序数组中出现的次数。
+     * 示例 1:
+     * <p>
+     * 输入: nums = [5,7,7,8,8,10], target = 8
+     * 输出: 2
+     * 示例 2:
+     * <p>
+     * 输入: nums = [5,7,7,8,8,10], target = 6
+     * 输出: 0
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search(int[] nums, int target) {
+        if (nums == null) {
+            return 0;
+        }
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    public int search1(int[] nums, int target) {
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            int mid = (i + j) >> 1;
+            if (nums[mid] < target) {
+                i = mid + 1;
+            } else {
+                j = mid - 1;
+            }
+        }
+        int left = j;
+        i = 0;
+        j = nums.length - 1;
+        while (i <= j) {
+            int mid = (i + j) >> 1;
+            if (nums[mid] <= target) {
+                i = mid + 1;
+            } else {
+                j = mid - 1;
+            }
+        }
+        int right = i;
+        return right - left - 1;
+    }
+
+    @Test
+    public void testSearch() {
+        int[] nums = {5,7,7,8,8,10};
+        int i = search1(nums, 8);
+        System.out.println(i);
+    }
+
     /**
      * title:旋转数组
      * problem description:
@@ -841,8 +939,8 @@ public class ArrayTest {
 
     @Test
     public void testWindows() {
-        int[] nums = {1,3,-1,-3,5,3,6,7};
-        int k =3;
+        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+        int k = 3;
         int[] ints = maxSlidingWindow(nums, k);
         int[] res = new int[0];
         int length = res.length;

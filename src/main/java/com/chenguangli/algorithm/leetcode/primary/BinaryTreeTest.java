@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 二叉树
@@ -210,12 +211,154 @@ public class BinaryTreeTest {
 
     @Test
     public void test2() {
-        int[] pre = {1,2,3,4,2,3,4};
-        int[] in = {4,3,2,1,2,3,4};
+        int[] pre = {1, 2, 3, 4, 2, 3, 4};
+        int[] in = {4, 3, 2, 1, 2, 3, 4};
         TreeNode treeNode = buildTree(pre, in);
         boolean balanced = isBalanced(treeNode);
         int i = kthLargest(treeNode, 1);
         TreeNode treeNode1 = mirrorTree(treeNode);
+        System.out.println();
+    }
+
+
+    /**
+     * 树的子结构
+     * 输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)
+     * <p>
+     * B是A的子结构， 即 A中有出现和B相同的结构和节点值。
+     * <p>
+     * 例如:
+     * 给定的树 A:
+     * <p>
+     *      3
+     *     / \
+     *    4   5
+     *   / \
+     *  1   2
+     * 给定的树 B：
+     * <p>
+     *    4 
+     *   /
+     *  1
+     * 返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null) {
+            return false;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (!stack.empty() || A != null) {
+            while (A != null) {
+                stack.push(A);
+                A = A.left;
+            }
+            if (!stack.empty()) {
+                A = stack.pop();
+                if (isEqual(A, B)) {
+                    return true;
+                }
+                A = A.right;
+            }
+        }
+        return false;
+    }
+
+    public boolean isEqual(TreeNode A, TreeNode B) {
+        if (A == null && B == null) {
+            return true;
+        }
+        if (A == null) {
+            return false;
+        }
+        if (B == null) {
+            return true;
+        }
+        if (A.val != B.val) {
+            return false;
+        }
+        return isEqual(A.left, B.left) && isEqual(A.right, B.right);
+    }
+
+    /**
+     * 二叉树的最近公共祖先
+     * 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+     * <p>
+     * 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+     * <p>
+     * 例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]
+     * <p>
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+     * 输出: 3
+     * 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
+     *
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        TreeNode treeNode = lowestCommonAncestor(root.left, p, q);
+
+        return null;
+
+    }
+
+    public TreeNode findNode(TreeNode root, TreeNode a) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == a.val) {
+            return root;
+        }
+        TreeNode node = findNode(root.left, a);
+        if (node == null) {
+            node = findNode(root.right, a);
+        }
+        return node;
+    }
+
+    public boolean findPath(TreeNode root, TreeNode a, Stack<Integer> stack) {
+        if (root == null) {
+            return false;
+        }
+        stack.push(root.val);
+        if (root.val == a.val) {
+            return true;
+        }
+        boolean p = findPath(root.left, a, stack);
+        if (!p && root.right != null){
+            p =findPath(root.right, a, stack);
+        }
+        if (!p){
+            stack.pop();
+        }
+        return p;
+    }
+
+
+    @Test
+    public void test4() {
+
+        TreeNode root = buildTree(new int[]{3, 5, 6, 2, 7, 4, 1, 0, 8}, new int[]{6, 5, 7, 2, 4, 3, 0, 1, 8});
+        Stack<Integer> stack = new Stack<>();
+        findPath(root, new TreeNode(7), stack);
+        System.out.println(stack);
+    }
+
+    @Test
+    public void test3() {
+        TreeNode A = buildTree(new int[]{3, 4, 1, 2, 5}, new int[]{1, 4, 2, 3, 5});
+        TreeNode B = buildTree(new int[]{4, 1}, new int[]{1, 4});
+        boolean subStructure = isSubStructure(A, B);
         System.out.println();
     }
 
