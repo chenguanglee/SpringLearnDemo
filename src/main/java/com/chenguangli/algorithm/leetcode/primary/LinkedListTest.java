@@ -3,7 +3,9 @@ package com.chenguangli.algorithm.leetcode.primary;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LinkedListTest {
 
@@ -443,26 +445,28 @@ public class LinkedListTest {
      * 复杂链表的复制
      * 请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。
      * todo result wrong
+     *
      * @param head
      * @return
      */
     public NewNode copyRandomList(NewNode head) {
+        Map<NewNode, NewNode> map = new HashMap<>();
         NewNode newNode = new NewNode(0);
         NewNode pre = newNode;
-        while (head != null) {
-            pre.next = new NewNode(head.val);
+        NewNode head1 = head;
+        while (head1 != null) {
+            pre.next = new NewNode(head1.val);
             pre = pre.next;
-            pre.random = head.random;
-            head.random = pre;
-            head = head.next;
+            map.put(head1, pre);
+            head1 = head1.next;
         }
         NewNode pre1 = newNode.next;
-        while (pre1 != null) {
-            NewNode random = pre1.random;
-            if (random != null){
-                pre1.random = random.random;
-            }
+        NewNode head2 = head;
+        while (pre1 != null && head2 != null) {
+            NewNode random = head2.random;
+            pre1.random = map.get(random);
             pre1 = pre1.next;
+            head2 = head2.next;
         }
         return newNode.next;
     }
