@@ -85,6 +85,7 @@ public class BinaryTreeTest {
                 rightIn = Arrays.copyOfRange(inorder, i + 1 > inLength ? inLength : i + 1, inLength);
                 node.left = buildTree(leftPre, leftIn);
                 node.right = buildTree(rightPre, rightIn);
+                break;
             }
         }
         return node;
@@ -335,10 +336,10 @@ public class BinaryTreeTest {
             return true;
         }
         boolean p = findPath(root.left, a, stack);
-        if (!p && root.right != null){
-            p =findPath(root.right, a, stack);
+        if (!p && root.right != null) {
+            p = findPath(root.right, a, stack);
         }
-        if (!p){
+        if (!p) {
             stack.pop();
         }
         return p;
@@ -351,35 +352,49 @@ public class BinaryTreeTest {
      * todo
      * 示例:
      * 给定如下二叉树，以及目标和 sum = 22，
-     *
-     *               5
-     *              / \
-     *             4   8
-     *            /   / \
-     *           11  13  4
-     *          /  \    / \
-     *         7    2  5   1
+     * <p>
+     * 5
+     * / \
+     * 4   8
+     * /   / \
+     * 11  13  4
+     * /  \    / \
+     * 7    2  5   1
      * 返回:
-     *
+     * <p>
      * [
-     *    [5,4,11,2],
-     *    [5,8,4,5]
+     * [5,4,11,2],
+     * [5,8,4,5]
      * ]
      *
      * @param root
      * @param sum
      * @return
      */
+    private List<List<Integer>> resList = new ArrayList<>();
+    private List<Integer> res = new ArrayList<>();
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
-      
-        return null;
+        path(root, sum);
+        return resList;
     }
 
+    public void path(TreeNode root, int sum) {
+        if (root == null) return;
+        res.add(root.val);
+        sum -= root.val;
+        if (sum == 0 && root.left == null && root.right == null) {
+            resList.add(new ArrayList<>(res));
+        }
+        path(root.left, sum);
+        path(root.right, sum);
+        res.remove(res.size() - 1);
+    }
 
     @Test
     public void test4() {
-
-        TreeNode root = buildTree(new int[]{3, 5, 6, 2, 7, 4, 1, 0, 8}, new int[]{6, 5, 7, 2, 4, 3, 0, 1, 8});
+        TreeNode root = buildTree(new int[]{5, 4, 11, 7, 2, 8, 13, 4, 5, 1}, new int[]{7, 11, 2, 4, 5, 13, 8, 5, 4, 1});
+        List<List<Integer>> lists = pathSum(root, 22);
         Stack<Integer> stack = new Stack<>();
         findPath(root, new TreeNode(7), stack);
         System.out.println(stack);
