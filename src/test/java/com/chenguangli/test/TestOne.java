@@ -108,10 +108,16 @@ public class TestOne {
         return sum;
     }
 
-    public int sum(int sum,int n) {
-        if (n == 0){
+    public int sum(int sum, int n) {
+        if (n == 0) {
             return sum;
         }
-        return sum(sum + n,--n);
+        return sum(sum + n, --n);
+    }
+
+    @Test
+    public void test0429() {
+        double a = 2.10000;
+        System.out.println(Math.pow(a,3));
     }
 }

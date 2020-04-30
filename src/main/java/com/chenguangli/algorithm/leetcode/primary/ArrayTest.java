@@ -156,7 +156,7 @@ public class ArrayTest {
 
     @Test
     public void testSearch() {
-        int[] nums = {5,7,7,8,8,10};
+        int[] nums = {5, 7, 7, 8, 8, 10};
         int i = search1(nums, 8);
         System.out.println(i);
     }
@@ -937,6 +937,59 @@ public class ArrayTest {
         return res;
     }
 
+
+    /**
+     * 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：arr = [3,2,1], k = 2
+     * 输出：[1,2] 或者 [2,1]
+     * 示例 2：
+     * <p>
+     * 输入：arr = [0,1,2,1], k = 1
+     * 输出：[0]
+     *
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] getLeastNumbers(int[] arr, int k) {
+        quickSort(arr, 0, arr.length - 1);
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    public int[] quickSort(int[] arr, int i, int j) {
+        if (j > i) {
+            int par = getPar(arr, i, j);
+            quickSort(arr, i, par);
+            quickSort(arr, par + 1, j);
+        }
+        return arr;
+    }
+
+    public int getPar(int[] arr, int i, int j) {
+        int k = i + 1;
+        for (int i1 = k; i1 <= j; i1++) {
+            if (arr[i1] < arr[i]) {
+                swap(arr, k, i1);
+                k++;
+            }
+        }
+        swap(arr, i, k - 1);
+        return k - 1;
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
     @Test
     public void testWindows() {
         int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
@@ -951,6 +1004,12 @@ public class ArrayTest {
     @Test
     public void testFind() {
         int[] nums = new int[]{2, 3, 1, 0, 2, 5, 3};
+        int[] counter = new int[10001];
+        for (int num: nums) {
+            counter[num]++;
+        }
+
+        int[] leastNumbers = getLeastNumbers(nums, 4);
         int repeatNumber = findRepeatNumber1(nums);
         int[][] array = {
                 {1, 2, 8, 9},
