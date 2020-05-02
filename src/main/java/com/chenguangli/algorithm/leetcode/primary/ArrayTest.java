@@ -990,6 +990,27 @@ public class ArrayTest {
         arr[j] = temp;
     }
 
+
+    /**
+     * 距离顺序排列矩阵单元格
+     * 给出 R 行 C 列的矩阵，其中的单元格的整数坐标为 (r, c)，满足 0 <= r < R 且 0 <= c < C。
+     * <p>
+     * 另外，我们在该矩阵中给出了一个坐标为 (r0, c0) 的单元格。
+     * <p>
+     * 返回矩阵中的所有单元格的坐标，并按到 (r0, c0) 的距离从最小到最大的顺序排，其中，两单元格(r1, c1) 和 (r2, c2) 之间的距离是曼哈顿距离，|r1 - r2| + |c1 - c2|。（你可以按任何满足此条件的顺序返回答案。）
+     *
+     * @param R
+     * @param C
+     * @param r0
+     * @param c0
+     * @return
+     */
+    public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
+
+        return null;
+
+    }
+
     @Test
     public void testWindows() {
         int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
@@ -1005,7 +1026,7 @@ public class ArrayTest {
     public void testFind() {
         int[] nums = new int[]{2, 3, 1, 0, 2, 5, 3};
         int[] counter = new int[10001];
-        for (int num: nums) {
+        for (int num : nums) {
             counter[num]++;
         }
 

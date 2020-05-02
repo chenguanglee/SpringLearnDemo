@@ -3,10 +3,8 @@ package com.chenguangli.algorithm.leetcode.primary;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 二叉树
@@ -46,6 +44,165 @@ public class BinaryTreeTest {
         TreeNode(int x) {
             val = x;
         }
+    }
+
+
+    /**
+     * I. 从上到下打印二叉树
+     * 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+     * <p>
+     *  
+     * <p>
+     * 例如:
+     * 给定二叉树: [3,9,20,null,null,15,7],
+     * <p>
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回：
+     * <p>
+     * [3,9,20,15,7]
+     *
+     * @param root
+     * @return
+     */
+    public int[] levelOrder(TreeNode root) {
+        if (root == null) {
+            return new int[]{};
+        }
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            while (count > 0) {
+                TreeNode poll = queue.poll();
+                res.add(poll.val);
+                if (poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+                count--;
+            }
+        }
+        int[] resArray = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            resArray[i] = res.get(i);
+        }
+        return resArray;
+    }
+
+
+    /**
+     * II. 从上到下打印二叉树 II
+     * 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+     * <p>
+     *  
+     * <p>
+     * 例如:
+     * 给定二叉树: [3,9,20,null,null,15,7],
+     * <p>
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回其层次遍历结果：
+     * <p>
+     * [
+     * [3],
+     * [9,20],
+     * [15,7]
+     * ]
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        List<List<Integer>> res = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> list = new ArrayList<>();
+            while (count > 0) {
+                TreeNode poll = queue.poll();
+                list.add(poll.val);
+                if (poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+                count--;
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+
+    /**
+     * III. 从上到下打印二叉树 III
+     * 请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+     * <p>
+     *  
+     * <p>
+     * 例如:
+     * 给定二叉树: [3,9,20,null,null,15,7],
+     * <p>
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回其层次遍历结果：
+     * <p>
+     * [
+     * [3],
+     * [20,9],
+     * [15,7]
+     * ]
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int row = 1;
+        List<List<Integer>> res = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> list = new ArrayList<>();
+            while (count > 0) {
+                TreeNode poll = queue.poll();
+                list.add(poll.val);
+                if (poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+                count--;
+            }
+            if (row % 2 == 0) {
+                Collections.reverse(list);
+            }
+            row++;
+            res.add(list);
+        }
+        return res;
     }
 
 
@@ -349,7 +506,7 @@ public class BinaryTreeTest {
     /**
      * 二叉树中和为某一值的路径
      * 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
-     *
+     * <p>
      * 示例:
      * 给定如下二叉树，以及目标和 sum = 22，
      * <p>
