@@ -2,6 +2,8 @@ package com.chenguangli.algorithm.leetcode.primary;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 public class StringTest {
 
 
@@ -163,9 +165,140 @@ public class StringTest {
     public String reverseLeftWords(String s, int n) {
         StringBuilder sb = new StringBuilder();
         for (int i = n; i < s.length() + n; i++) {
-            sb.append(s.charAt(i%s.length()));
+            sb.append(s.charAt(i % s.length()));
         }
         return sb.toString();
+    }
+
+
+    /**
+     * 比较版本号
+     * 比较两个版本号 version1 和 version2。
+     * 如果 version1 > version2 返回 1，如果 version1 < version2 返回 -1， 除此之外返回 0。
+     * <p>
+     * 你可以假设版本字符串非空，并且只包含数字和 . 字符。
+     * <p>
+     *  . 字符不代表小数点，而是用于分隔数字序列。
+     * <p>
+     * 例如，2.5 不是“两个半”，也不是“差一半到三”，而是第二版中的第五个小版本。
+     * <p>
+     * 你可以假设版本号的每一级的默认修订版号为 0。例如，版本号 3.4 的第一级（大版本）和第二级（小版本）修订号分别为 3 和 4。其第三级和第四级修订号均为 0。
+     *
+     * @param version1
+     * @param version2
+     * @return
+     */
+    public int compareVersion(String version1, String version2) {
+        String[] v1 = version1.split("\\.");
+        String[] v2 = version2.split("\\.");
+        int k = v1.length > v2.length ? v1.length : v2.length;
+        for (int i = 0; i < k; i++) {
+            if (i >= v1.length) {
+                int b = Integer.parseInt(v2[i]);
+                if (b != 0) {
+                    return -1;
+                }
+            } else if (i >= v2.length) {
+                int a = Integer.parseInt(v1[i]);
+                if (a != 0) {
+                    return 1;
+                }
+            } else {
+                int a = Integer.parseInt(v1[i]);
+                int b = Integer.parseInt(v2[i]);
+                if (a > b) {
+                    return 1;
+                }
+                if (a < b) {
+                    return -1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * I. 翻转单词顺序
+     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，则输出"student. a am I"。
+     * <p>
+     *  
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入: "the sky is blue"
+     * 输出: "blue is sky the"
+     * 示例 2：
+     * <p>
+     * 输入: "  hello world!  "
+     * 输出: "world! hello"
+     * 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+     * 示例 3：
+     * <p>
+     * 输入: "a good   example"
+     * 输出: "example good a"
+     * 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        s = s.trim();
+        String[] s1 = s.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = s1.length - 1; i >= 0; i--) {
+            if (!s1[i].equals("")) {
+                sb.append(s1[i]);
+                if (i != 0) {
+                    sb.append(" ");
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    @Test
+    public void testReverseWords() {
+        String a = "the sky is blue";
+        System.out.println(reverseWords(a));
+        String b = "  hello world!  ";
+        System.out.println(reverseWords(b));
+        String c = "a good  example";
+        System.out.println(reverseWords(c));
+    }
+
+    @Test
+    public void testCompareVersion() {
+        String version1 = "1.0.1", version2 = "1";
+        int i = compareVersion(version1, version2);
+        System.out.println(i);
+
+        version1 = "1";
+        version2 = "1.0.1";
+        i = compareVersion(version1, version2);
+        System.out.println(i);
+
+        version1 = "0.1";
+        version2 = "1.1";
+        i = compareVersion(version1, version2);
+        System.out.println(i);
+
+        version1 = "7.5.2.4";
+        version2 = "7.5.3";
+        i = compareVersion(version1, version2);
+        System.out.println(i);
+
+        version1 = "1.01";
+        version2 = "1.001";
+        i = compareVersion(version1, version2);
+        System.out.println(i);
+
+        version1 = "1.0";
+        version2 = "1.0.0";
+        i = compareVersion(version1, version2);
+        System.out.println(i);
     }
 
     @Test

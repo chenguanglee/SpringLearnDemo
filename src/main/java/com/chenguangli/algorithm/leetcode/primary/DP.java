@@ -2,6 +2,10 @@ package com.chenguangli.algorithm.leetcode.primary;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 /**
  * @author chenguangli
  * @date 2020/5/2 22:52
@@ -65,7 +69,7 @@ public class DP {
     public int translateNum(int num) {
         String s = String.valueOf(num);
         int a = 1, b = 1;
-        for (int i = 2; i < s.length(); i++) {
+        for (int i = 2; i <= s.length(); i++) {
             String k = s.substring(i - 2, i);
             int c;
             if (k.compareTo("10") >= 0 && k.compareTo("25") <= 0) {
@@ -77,6 +81,63 @@ public class DP {
             b = c;
         }
         return b;
+    }
+
+    /**
+     * 最长不含重复字符的子字符串
+     * 请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+     * <p>
+     *  
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * 示例 2:
+     * <p>
+     * 输入: "bbbbb"
+     * 输出: 1
+     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     * 示例 3:
+     * <p>
+     * 输入: "pwwkew"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        Set<Character> set = new HashSet<>();
+        int i = 0, j = 0;
+        int maxLength = 0;
+        LinkedList<Character> linkedList = new LinkedList<>();
+        char[] chars = s.toCharArray();
+        while (j < s.length()) {
+            if (!set.contains(chars[j])) {
+                set.add(chars[j]);
+                linkedList.addLast(chars[j]);
+                j++;
+            } else {
+                Character character = linkedList.removeFirst();
+                set.remove(character);
+                i++;
+            }
+            maxLength = j - i > maxLength ? j - i : maxLength;
+        }
+        return maxLength;
+    }
+
+    @Test
+    public void testLengthOfLongestSubstring() {
+        String a = "bbbbb";
+        int i = lengthOfLongestSubstring(a);
+        System.out.println(i);
     }
 
     @Test

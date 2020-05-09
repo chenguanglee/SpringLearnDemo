@@ -2,10 +2,7 @@ package com.chenguangli.algorithm.leetcode.primary;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ArrayTest {
     /**
@@ -847,21 +844,64 @@ public class ArrayTest {
         if (nums.length > 0 && nums.length <= 2) {
             return nums[0];
         }
-        int maxCount = 0;
         int k = nums[0];
-        for (int i = 0; i < nums.length; i++) {
-            int count = 0;
-            for (int j = 0; j < nums.length; j++) {
-                if (nums[i] == nums[j]) {
-                    count++;
-                }
-            }
-            if (count > maxCount) {
-                maxCount = count;
+        int count = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (count == 0) {
                 k = nums[i];
+                count++;
+                continue;
+            }
+            if (nums[i] == k) {
+                count++;
+            } else {
+                count--;
             }
         }
         return k;
+    }
+
+    @Test
+    public void testMajorityElement() {
+        int[] nums = {1, 2, 3, 2, 2, 2, 5, 4, 2};
+        int i = majorityElement(nums);
+        System.out.println(i);
+    }
+
+
+    /**
+     * I. 数组中数字出现的次数
+     * 一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。
+     * 示例 1：
+     * <p>
+     * 输入：nums = [4,1,4,6]
+     * 输出：[1,6] 或 [6,1]
+     * 示例 2：
+     * <p>
+     * 输入：nums = [1,2,10,4,1,4,3,3]
+     * 输出：[2,10] 或 [10,2]
+     *
+     * @param nums
+     * @return
+     */
+    public int[] singleNumbers(int[] nums) {
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            k ^= nums[i];
+        }
+        int a = 1;
+        while ((a & k) == 0) {
+            a <<= a;
+        }
+        int c = 0, d = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if ((a & nums[i]) == 0) {
+                c ^= nums[i];
+            } else {
+                d ^= nums[i];
+            }
+        }
+        return new int[]{c, d};
     }
 
     /**
@@ -1009,6 +1049,92 @@ public class ArrayTest {
 
         return null;
 
+    }
+
+    /**
+     * 全排列
+     * 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: [1,2,3]
+     * 输出:
+     * [
+     * [1,2,3],
+     * [1,3,2],
+     * [2,1,3],
+     * [2,3,1],
+     * [3,1,2],
+     * [3,2,1]
+     * ]
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        permuteV(nums, list, res);
+        return res;
+    }
+
+    public void permuteV(int[] nums, LinkedList<Integer> list, List<List<Integer>> res) {
+        if (list.size() == nums.length) {
+            res.add(new LinkedList<>(list));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (list.contains(nums[i])) continue;
+            list.add(nums[i]);
+            permuteV(nums, list, res);
+            list.removeLast();
+        }
+    }
+
+    @Test
+    public void testPermute() {
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> permute = permute(nums);
+        System.out.println();
+    }
+
+    /**
+     * 连续子数组的最大和
+     * 输入一个整型数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
+     * <p>
+     * 要求时间复杂度为O(n)。
+     * <p>
+     *  
+     * <p>
+     * 示例1:
+     * <p>
+     * 输入: nums = [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出: 6
+     * 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 1 <= arr.length <= 10^5
+     * -100 <= arr[i] <= 100
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int max = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] = Math.max(nums[i - 1] + nums[i], nums[i]);
+            max = nums[i] > max ? nums[i] : max;
+        }
+        return max;
+    }
+
+    @Test
+    public void testMaxSubArray() {
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int i = maxSubArray(nums);
+        System.out.println(i);
     }
 
     @Test

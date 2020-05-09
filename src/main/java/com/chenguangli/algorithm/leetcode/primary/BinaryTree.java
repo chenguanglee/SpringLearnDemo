@@ -215,7 +215,7 @@ public class BinaryTree {
         if (node == null) {
             return;
         }
-        System.out.print(node.getData() + " ");
+        System.out.println(node.getData() + " ");
         firstOrder(node.getLeftNode());
         firstOrder(node.getRightNode());
     }

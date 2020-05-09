@@ -243,6 +243,20 @@ public class LinkedListTest {
     }
 
     /**
+     * 2->3->1->5
+     * 3->6
+     * 2315+36 = 2351
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        return null;
+    }
+
+
+    /**
      * 从尾到头打印链表
      * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
      * 示例 1：

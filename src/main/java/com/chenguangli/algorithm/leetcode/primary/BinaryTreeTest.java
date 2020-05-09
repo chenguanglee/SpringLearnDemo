@@ -46,6 +46,109 @@ public class BinaryTreeTest {
         }
     }
 
+    /**
+     * I. 二叉搜索树的最近公共祖先
+     * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+     * <p>
+     * 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+     * <p>
+     * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+     * 输出: 6
+     * 解释: 节点 2 和节点 8 的最近公共祖先是 6。
+     *
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        while (root != null) {
+            if (root.val > p.val && root.val > q.val) {
+                root = root.left;
+            } else if (root.val < p.val && root.val < q.val) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return null;
+    }
+
+    @Test
+    public void testLowestCommonAncestor1() {
+        int[] pre = {6, 2, 0, 4, 3, 5, 8, 7, 9};
+        int[] in = {0, 2, 3, 4, 5, 6, 7, 8, 9};
+        TreeNode treeNode = buildTree(pre, in);
+        TreeNode treeNode1 = lowestCommonAncestor1(treeNode, new TreeNode(10), new TreeNode(11));
+        System.out.println(treeNode1.val);
+    }
+
+    /**
+     * 翻转二叉树
+     * 翻转一棵二叉树。
+     * <p>
+     * 示例：
+     * <p>
+     * 输入：
+     * <p>
+     * 4
+     * /   \
+     * 2     7
+     * / \   / \
+     * 1   3 6   9
+     * 输出：
+     * <p>
+     * 4
+     * /   \
+     * 7     2
+     * / \   / \
+     * 9   6 3   1
+     *
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        invertTree1(root);
+        return root;
+    }
+
+    public void invertTree1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+        invertTree(root.left);
+        invertTree(root.right);
+    }
+
+    public TreeNode invertTree2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = invertTree2(root.left);
+        TreeNode right = invertTree2(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    @Test
+    public void testInvertTree() {
+        int[] pre = {4, 2, 1, 3, 7, 6, 9};
+        int[] in = {1, 2, 3, 4, 6, 7, 9};
+        TreeNode treeNode = buildTree(pre, in);
+        invertTree2(treeNode);
+        invertTree(treeNode);
+        System.out.println();
+    }
 
     /**
      * I. 从上到下打印二叉树
@@ -463,11 +566,21 @@ public class BinaryTreeTest {
      * @return
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-
-        TreeNode treeNode = lowestCommonAncestor(root.left, p, q);
-
-        return null;
-
+        if (root == null || root.val == p.val || root.val == q.val) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null && right == null){
+            return null;
+        }
+        if (left == null){
+            return right;
+        }
+        if (right == null){
+            return left;
+        }
+        return root;
     }
 
     public TreeNode findNode(TreeNode root, TreeNode a) {
@@ -564,6 +677,8 @@ public class BinaryTreeTest {
         boolean subStructure = isSubStructure(A, B);
         System.out.println();
     }
+
+
 
 
     @Test
