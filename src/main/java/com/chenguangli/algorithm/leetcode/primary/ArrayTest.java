@@ -1099,6 +1099,192 @@ public class ArrayTest {
     }
 
     /**
+     * 扑克牌中的顺子
+     * 从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+     * <p>
+     *  
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: [1,2,3,4,5]
+     * 输出: True
+     *  
+     * <p>
+     * 示例 2:
+     * <p>
+     * 输入: [0,0,1,2,5]
+     * 输出: True
+     *
+     * @param nums
+     * @return
+     */
+    public boolean isStraight(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) continue;
+            if (set.contains(nums[i])) {
+                return false;
+            }
+            set.add(nums[i]);
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+        }
+        return max - min < 5;
+    }
+
+    @Test
+    public void testIsStraight() {
+        int[] nums = {9, 4, 2, 5, 6};
+        boolean straight = isStraight(nums);
+        System.out.println(straight);
+    }
+
+
+    /**
+     * II. 和为s的连续正数序列
+     * 输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+     * <p>
+     * 序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+     * <p>
+     *  
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：target = 9
+     * 输出：[[2,3,4],[4,5]]
+     * 示例 2：
+     * <p>
+     * 输入：target = 15
+     * 输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+     *
+     * @param target
+     * @return
+     */
+    public int[][] findContinuousSequence(int target) {
+        if (target == 2) return null;
+        int i = 1;
+        int k = 2;
+        int sum = i + k;
+        List<int[]> res = new ArrayList<>();
+        while (i <= (target / 2)) {
+            if (sum < target) {
+                k++;
+                sum += k;
+            } else if (sum > target) {
+                sum -= i;
+                i++;
+            } else {
+                int[] array = new int[k - i + 1];
+                for (int m = i; m <= k; m++) {
+                    array[m - i] = m;
+                }
+                res.add(array);
+                k++;
+                sum += k;
+            }
+        }
+        int[][] res1 = res.toArray(new int[0][]);
+        return res1;
+    }
+
+    @Test
+    public void testFindContinuousSequence() {
+        int[][] continuousSequence = findContinuousSequence(15);
+        System.out.println(continuousSequence);
+    }
+
+
+    /**
+     * 栈的压入、弹出序列
+     * 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。
+     * 假设压入栈的所有数字均不相等。例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，
+     * 但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。
+     * 示例 1：
+     * <p>
+     * 输入：pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
+     * 输出：true
+     * 解释：我们可以按以下顺序执行：
+     * push(1), push(2), push(3), push(4), pop() -> 4,
+     * push(5), pop() -> 5, pop() -> 3, pop() -> 2, pop() -> 1
+     * 示例 2：
+     * <p>
+     * 输入：pushed = [1,2,3,4,5], popped = [4,3,5,1,2]
+     * 输出：false
+     * 解释：1 不能在 2 之前弹出。
+     *
+     * @param pushed
+     * @param popped
+     * @return
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Stack<Integer> stack = new Stack<>();
+        int k = 0;
+        for (int i = 0; i < pushed.length; i++) {
+            int v = pushed[i];
+            stack.push(v);
+            while (!stack.empty() && stack.peek() == popped[k]) {
+                stack.pop();
+                k++;
+            }
+        }
+        return stack.empty();
+    }
+
+    /**
+     * 构建乘积数组
+     * 给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B 中的元素 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。
+     * <p>
+     *  
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: [1,2,3,4,5]
+     * 输出: [120,60,40,30,24]
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 所有元素乘积之和不会溢出 32 位整数
+     * a.length <= 100000
+     *
+     * @param a
+     * @return
+     */
+    public int[] constructArr(int[] a) {
+        if (a == null || a.length == 0 || a.length == 1) {
+            return new int[0];
+        }
+        int[] res = new int[a.length];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = 1;
+        }
+        int sum = 1;
+        for (int i = 1; i < a.length; i++) {
+            sum = sum * a[i - 1];
+            res[i] = sum;
+        }
+        sum = 1;
+        for (int i = a.length - 1; i > 0; i--) {
+            sum = sum * a[i];
+            res[i - 1] *= sum;
+        }
+        return res;
+    }
+
+    @Test
+    public void testConstructArr() {
+        int[] a = {1, 2, 3, 4, 5};
+        int[] ints = constructArr(a);
+        System.out.println();
+    }
+
+    /**
      * 连续子数组的最大和
      * 输入一个整型数组，数组里有正数也有负数。数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
      * <p>

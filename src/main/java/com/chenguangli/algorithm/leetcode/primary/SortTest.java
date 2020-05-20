@@ -186,4 +186,42 @@ public class SortTest {
         array[i] = array[j];
         array[j] = tmp;
     }
+
+    public int[] heapSort(int[] array) {
+        for (int i = array.length / 2 - 1; i >= 0; i--) {
+            adjustHeap(array, i, array.length);
+        }
+        for (int i = array.length - 1; i > 0; i--) {
+            int temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+            adjustHeap(array, 0, i);
+        }
+        return array;
+    }
+
+    public void adjustHeap(int[] array, int i, int length) {
+        int temp = array[i];
+        for (int k = i * 2 + 1; k < length; k = k * 2 + 1) {
+            if (k + 1 < length && array[k] < array[k + 1]) {
+                k++;
+            }
+            if (array[k] > temp) {
+                array[i] = array[k];
+                i = k;
+            } else {
+                break;
+            }
+        }
+        array[i] = temp;
+    }
+
+    @Test
+    public void testHeapSort() {
+        int[] a = {10, 4, 2, 8, 15, 7};
+        int[] ints = heapSort(a);
+        for (int i = 0; i < ints.length; i++) {
+            System.out.println(ints[i]);
+        }
+    }
 }
