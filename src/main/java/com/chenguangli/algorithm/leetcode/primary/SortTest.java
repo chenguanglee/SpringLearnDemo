@@ -3,6 +3,7 @@ package com.chenguangli.algorithm.leetcode.primary;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * 排序算法
@@ -220,6 +221,50 @@ public class SortTest {
     public void testHeapSort() {
         int[] a = {10, 4, 2, 8, 15, 7};
         int[] ints = heapSort(a);
+        for (int i = 0; i < ints.length; i++) {
+            System.out.println(ints[i]);
+        }
+    }
+
+
+    public int[] mergeSort(int[] array) {
+        sortM(array, 0, array.length - 1);
+        return array;
+    }
+
+    public void sortM(int[] array, int l, int r) {
+        if (l == r) {
+            return;
+        }
+        int mid = l + (r - l) / 2;
+        sortM(array, l, mid);
+        sortM(array, mid + 1, r);
+        merge(array, l, mid, r);
+    }
+
+    public void merge(int[] array, int l, int mid, int r) {
+        int[] temp = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = mid + 1;
+        while (p1 <= mid && p2 <= r) {
+            temp[i++] = array[p1] <= array[p2] ? array[p1++] : array[p2++];
+        }
+        while (p1 <= mid) {
+            temp[i++] = array[p1++];
+        }
+        while (p2 <= r) {
+            temp[i++] = array[p2++];
+        }
+        for (int k = 0; k < temp.length; k++) {
+            array[l + k] = temp[k];
+        }
+    }
+
+    @Test
+    public void testMergeSort() {
+        int[] array = {3,5,1,4,9,7,6};
+        int[] ints = mergeSort(array);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(ints[i]);
         }
