@@ -88,7 +88,7 @@ public class StringTest {
     }
 
     public boolean find(char[][] board, char[] words, int x, int y, int k) {
-        if (x < 0 || x >= board.length || y < 0 || y >= board.length) {
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) {
             return false;
         }
         if (board[x][y] != words[k]) {
@@ -105,6 +105,14 @@ public class StringTest {
                 find(board, words, x, y + 1, k + 1);
         board[x][y] = tmp;
         return res;
+    }
+
+
+    @Test
+    public void testFind() {
+        char[][] board1 = {{'a', 'a'}};
+        boolean abcd = exist(board1, "aa");
+        System.out.println(abcd);
     }
 
     /**
@@ -355,11 +363,5 @@ public class StringTest {
     }
 
 
-    @Test
-    public void testFind() {
-        char[][] chars = {{'C', 'A', 'A'}, {'A', 'A', 'A'}, {'B', 'C', 'D'}};
 
-        boolean asad = exist(chars, "AAB");
-        System.out.println(asad);
-    }
 }
