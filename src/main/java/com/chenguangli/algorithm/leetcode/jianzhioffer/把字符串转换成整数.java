@@ -59,11 +59,41 @@ public class 把字符串转换成整数 {
      * @return
      */
     public int strToInt(String str) {
-        return 0;
+        if (str == null) {
+            return 0;
+        }
+        str = str.trim();
+        if (str.length() == 0) {
+            return 0;
+        }
+        char[] chars = str.toCharArray();
+        int sign = 1;
+        int k = 0;
+        if (chars[0] == '-') {
+            sign = -1;
+            k = 1;
+        } else if (chars[0] == '+') {
+            k = 1;
+        }
+        int res = 0;
+        for (int i = k; i < chars.length; i++) {
+            if (chars[i] < '0' || chars[i] > '9') {
+                break;
+            }
+            int num = chars[i] - '0';
+            if ((res > Integer.MAX_VALUE / 10) || (res == Integer.MAX_VALUE / 10 && num > 7)) {
+                res = sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                break;
+            }
+            res = res * 10 + num;
+        }
+        return res * sign;
     }
 
     @Test
     public void test() {
-        System.out.println((1<<31)-1);
+        int i = strToInt("+2147483648");
+        System.out.println(i);
+
     }
 }
