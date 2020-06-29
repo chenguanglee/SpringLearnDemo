@@ -3,6 +3,9 @@ package com.chenguangli.test;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author chenguangli
@@ -118,6 +121,18 @@ public class TestOne {
     @Test
     public void test0429() {
         double a = 2.10000;
-        System.out.println(Math.pow(a,3));
+        System.out.println(Math.pow(a, 3));
+    }
+
+    @Test
+    public void testExecutor() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(11);
+            }
+        });
+        executor.shutdown();
     }
 }
