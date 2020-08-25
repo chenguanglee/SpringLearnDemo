@@ -2,7 +2,10 @@ package com.chenguangli.test;
 
 import org.junit.Test;
 
+import javax.annotation.PreDestroy;
 import java.lang.reflect.Field;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -127,12 +130,48 @@ public class TestOne {
     @Test
     public void testExecutor() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(11);
-            }
-        });
+        executor.submit(() -> System.out.println(11));
         executor.shutdown();
+    }
+
+
+    @Test
+    public void testQuickSort() {
+        quickSort(new int[]{6, 7, 4, 3, 2, 1});
+    }
+
+    public void quickSort(int[] nums) {
+        sort(nums, 0, nums.length - 1);
+        System.out.println();
+    }
+
+    public void sort(int[] nums, int left, int right) {
+        if (right > left) {
+            int p = getPartition(nums, left, right);
+            sort(nums, left, p - 1);
+            sort(nums, p + 1, right);
+        }
+    }
+
+    public int getPartition(int[] nums, int left, int right) {
+        int k = left + 1;
+        for (int i = left + 1; i <= right; i++) {
+            if (nums[i] < nums[left]) {
+                int tmp = nums[i];
+                nums[i] = nums[k];
+                nums[k] = tmp;
+                k++;
+            }
+        }
+        int tmp = nums[left];
+        nums[left] = nums[--k];
+        nums[k] = tmp;
+        return k;
+    }
+
+    @Test
+    public void ip() throws Exception{
+        Enumeration<NetworkInterface> enumeration = NetworkInterface.getNetworkInterfaces();
+
     }
 }

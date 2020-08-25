@@ -8,7 +8,7 @@ package com.chenguangli.advance.pattern.singleton;
 class SingletonLazy {
 
     //懒汉模式(线程安全和不安全两种)
-    private static SingletonLazy instance = null;
+    private static volatile SingletonLazy instance = null;
 
     private SingletonLazy() {
     }
