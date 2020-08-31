@@ -155,6 +155,12 @@ public class SortTest {
     }
 
 
+    /**
+     * 快速排序
+     *
+     * @param array
+     * @return
+     */
     public int[] quickSort(int[] array) {
         int[] array0 = Arrays.copyOf(array, array.length);
         int length = array0.length;
@@ -188,6 +194,12 @@ public class SortTest {
         array[j] = tmp;
     }
 
+    /**
+     * 堆排序
+     *
+     * @param array
+     * @return
+     */
     public int[] heapSort(int[] array) {
         for (int i = array.length / 2 - 1; i >= 0; i--) {
             adjustHeap(array, i, array.length);
@@ -227,6 +239,12 @@ public class SortTest {
     }
 
 
+    /**
+     * 归并排序
+     *
+     * @param array
+     * @return
+     */
     public int[] mergeSort(int[] array) {
         sortM(array, 0, array.length - 1);
         return array;
@@ -263,7 +281,7 @@ public class SortTest {
 
     @Test
     public void testMergeSort() {
-        int[] array = {3,5,1,4,9,7,6};
+        int[] array = {3, 5, 1, 4, 9, 7, 6};
         int[] ints = mergeSort(array);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(ints[i]);
