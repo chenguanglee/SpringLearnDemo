@@ -1,0 +1,3 @@
+dubbo=com.chenguangli.dubbo.spi.SpiDemoImpl1
+cloud=com.chenguangli.dubbo.spi.SpiDemoImpl2
+lsf=com.chenguangli.dubbo.spi.SpiDemoImpl3
