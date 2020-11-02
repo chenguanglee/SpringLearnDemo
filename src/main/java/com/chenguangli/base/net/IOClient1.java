@@ -11,33 +11,33 @@ import java.util.Date;
 public class IOClient1 {
     public static void main(String[] args) throws Exception {
         try {
-            Socket socket = new Socket("127.0.0.1", 8000);
-            while (true) {
-                try {
-                    OutputStream outputStream = socket.getOutputStream();
-                    outputStream.write("hello world".getBytes());
-                    outputStream.flush();
-                    socket.shutdownOutput();
+            Socket socket = new Socket("127.0.0.1", 8090);
 
-                    InputStream inputStream = socket.getInputStream();
+            try {
+                OutputStream outputStream = socket.getOutputStream();
+                outputStream.write("hello world".getBytes());
+                outputStream.flush();
+                socket.shutdownOutput();
 
-                    if (inputStream != null) {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder stringBuffer = new StringBuilder();
-                        String str;
-                        while ((str = bufferedReader.readLine()) != null) {
-                            stringBuffer.append(str);
-                        }
-                        System.out.println(stringBuffer.toString());
-                        inputStream.close();
+                InputStream inputStream = socket.getInputStream();
+
+                if (inputStream != null) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder stringBuffer = new StringBuilder();
+                    String str;
+                    while ((str = bufferedReader.readLine()) != null) {
+                        stringBuffer.append(str);
                     }
-                    outputStream.close();
-                    //socket.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(stringBuffer.toString());
+                    inputStream.close();
                 }
+                outputStream.close();
+                //socket.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

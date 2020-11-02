@@ -5,7 +5,9 @@ import org.junit.Test;
 import javax.annotation.PreDestroy;
 import java.lang.reflect.Field;
 import java.net.NetworkInterface;
+import java.text.DecimalFormat;
 import java.util.Enumeration;
+import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -170,8 +172,44 @@ public class TestOne {
     }
 
     @Test
-    public void ip() throws Exception{
+    public void ip() throws Exception {
         Enumeration<NetworkInterface> enumeration = NetworkInterface.getNetworkInterfaces();
 
+    }
+
+
+    @Test
+    public void testd() {
+        aaa(0);
+    }
+
+    public void aaa(int a) {
+        if (a == 3) {
+            return;
+        }
+        aaa(++a);
+        System.out.println(a);
+    }
+
+    @Test
+    public void testFormat() {
+        DecimalFormat df = new DecimalFormat("0000");
+        System.out.println(df.format(2));
+        Random random = new Random();
+        for (int j=0;j<100;j++){
+            int i = 3+random.nextInt(20);
+            System.out.println(getRandomString(i));
+        }
+    }
+
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 }

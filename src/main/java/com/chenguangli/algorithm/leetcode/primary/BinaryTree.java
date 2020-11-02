@@ -95,20 +95,20 @@ public class BinaryTree {
 
     /**
      * 给定一个二叉树，检查它是否是镜像对称的。
-     *
+     * <p>
      * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
-     *     1
-     *    / \
-     *   2   2
-     *  / \ / \
+     * 1
+     * / \
+     * 2   2
+     * / \ / \
      * 3  4 4  3
-     *
+     * <p>
      * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
-     *     1
-     *    / \
-     *   2   2
-     *    \   \
-     *    3    3
+     * 1
+     * / \
+     * 2   2
+     * \   \
+     * 3    3
      *
      * @param node
      * @return
@@ -131,21 +131,21 @@ public class BinaryTree {
 
     /**
      * 给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
-     *
+     * <p>
      * 例如:
      * 给定二叉树: [3,9,20,null,null,15,7],
-     *
-     *     3
-     *    / \
-     *   9  20
-     *     /  \
-     *    15   7
+     * <p>
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
      * 返回其层次遍历结果：
-     *
+     * <p>
      * [
-     *   [3],
-     *   [9,20],
-     *   [15,7]
+     * [3],
+     * [9,20],
+     * [15,7]
      * ]
      *
      * @param root
@@ -200,8 +200,8 @@ public class BinaryTree {
     }
 
     public void insert2BalanceBinaryTree(BinaryTreeNode node) {
-        if (root == null){
-            root =node;
+        if (root == null) {
+            root = node;
         }
 
     }
@@ -282,5 +282,21 @@ public class BinaryTree {
         node.setRightNode(temp);
         exchangeBinaryTree(node.getLeftNode());
         exchangeBinaryTree(node.getRightNode());
+    }
+
+    public void mediumOrderNotRecursion(BinaryTreeNode node) {
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        while (!stack.empty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.getLeftNode();
+            }
+            if (!stack.empty()) {
+                node = stack.pop();
+                System.out.println(node.getData());
+                node = node.getRightNode();
+            }
+        }
+
     }
 }

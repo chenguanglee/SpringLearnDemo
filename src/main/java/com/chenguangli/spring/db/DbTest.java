@@ -35,4 +35,15 @@ public class DbTest {
         Spitter spitter = spitterRepository.findOne(id);
         System.out.println(spitter);
     }
+
+
+    @Test
+    public void testInsert1() {
+        spitterRepository.addSkuInfo("1","1");
+    }
+
+    @Test
+    public void testInsert2() {
+        spitterRepository.addRelation();
+    }
 }

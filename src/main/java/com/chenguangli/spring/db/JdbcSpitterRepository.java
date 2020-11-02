@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.Random;
 
 @Repository
 public class JdbcSpitterRepository implements SpitterRepository {
@@ -33,6 +35,40 @@ public class JdbcSpitterRepository implements SpitterRepository {
     @Override
     public Spitter findOne(int id) {
         return jdbcOperations.queryForObject(QUERY_SPITTER, new SpitterRowMapper(), id);
+    }
+
+    @Override
+    public void addSkuInfo(String skuId, String productName) {
+        String skuIdPrefix = "SKU20200916";
+        DecimalFormat df = new DecimalFormat("00000");
+        Random random = new Random();
+        for (int i = 10; i < 10000; i++) {
+            String skuId1 = skuIdPrefix + df.format(i);
+            int j = 3+random.nextInt(20);
+            String productName1 = getRandomString(j);
+            jdbcOperations.update("INSERT INTO t_sku_info(Fsku_id,Fproduct_name) values (?,?)", skuId1, productName1);
+        }
+    }
+
+    @Override
+    public void addRelation() {
+        String skuIdPrefix = "SKU20200916";
+        DecimalFormat df = new DecimalFormat("00000");
+        for (int i = 500;i <1000;i++){
+            String skuId1 = skuIdPrefix + df.format(i);
+            jdbcOperations.update("INSERT INTO t_relation_sku_info(Fuid,Fsku_id) values (?,?)",2,skuId1);
+        }
+    }
+
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 
     private static final class SpitterRowMapper implements RowMapper<Spitter> {
