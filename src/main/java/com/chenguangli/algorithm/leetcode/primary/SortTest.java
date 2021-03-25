@@ -287,4 +287,37 @@ public class SortTest {
             System.out.println(ints[i]);
         }
     }
+
+
+    public void quickSort2(int[] array, int left, int right) {
+        if (left < right) {
+            int p = getP(array, left, right);
+            quickSort2(array, left, p-1);
+            quickSort2(array, p + 1, right);
+        }
+    }
+
+    /**
+     * 7,6,5,8,10,2
+     * 2,6,5,7,8,10
+     * @param array
+     * @param left
+     * @param right
+     * @return
+     */
+    public int getP(int[] array, int left, int right) {
+        int index = left + 1;
+        for (int i = index; i <= right; i++) {
+            if (array[left] > array[i]) {
+                int tmp = array[index];
+                array[index] = array[i];
+                array[i] = tmp;
+                index++;
+            }
+        }
+        int tmp = array[left];
+        array[left] = array[index - 1];
+        array[index - 1] = tmp;
+        return index - 1;
+    }
 }

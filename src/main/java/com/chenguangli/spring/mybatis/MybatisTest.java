@@ -4,6 +4,7 @@ import com.chenguangli.spring.db.Spitter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class MybatisTest {
 
     @Autowired
     private SpitterDao spitterDao;
+
+    @Autowired
+    private Logic logic;
 
     @Test
     public void testQuery() {
@@ -99,5 +103,11 @@ public class MybatisTest {
     @Test
     public void testSelectProvider() {
         System.out.println(spitterDao.selectById(2));
+    }
+
+
+    @Test
+    public void testTransactional() {
+        logic.testTransactional();
     }
 }
