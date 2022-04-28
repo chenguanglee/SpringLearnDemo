@@ -1,3 +1,6 @@
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Main {
 
 
@@ -6,6 +9,8 @@ public class Main {
         Main main = new Main();
         System.getProperty("user.dir");
         System.out.println();
+
+        log.debug("123");
 
     }
 

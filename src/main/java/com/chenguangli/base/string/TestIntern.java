@@ -1,13 +1,18 @@
 package com.chenguangli.base.string;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author chenguangli
  * @date 2020/1/5 12:07
  */
+@Slf4j
 public class TestIntern {
 
     public static void main(String[] args) {
 
+
+        log.debug("123");
         //1.6版本 false
         /**
          * str2.intern()会把首次遇到的字符串实例复制到永久代中，返回的是永久代中实例的引用
